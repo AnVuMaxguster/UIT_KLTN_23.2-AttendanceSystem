@@ -26,9 +26,9 @@ services:
       - "1883:1883"
       - "9001:9001"
     volumes:
-      - ./mqtt/config:/mosquitto/config:rw
-      - ./mqtt/data:/mosquitto/data:rw
-      - ./mqtt/log:/mosquitto/log:rw
+      - /home/ubuntu/anvu/services_volume/mqtt/config:/mosquitto/config:rw
+      - /home/ubuntu/anvu/services_volume/mqtt/data:/mosquitto/data:rw
+      - /home/ubuntu/anvu/services_volume/mqtt/log:/mosquitto/log:rw
     restart: unless-stopped
 
   mongodb:
@@ -38,7 +38,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin
     volumes:
-      - ./mongodb/data:/data/db
+      - /home/ubuntu/anvu/services_volume/mongodb/data:/data/db
     restart: unless-stopped
 
   mongo-express:
@@ -52,10 +52,10 @@ services:
       ME_CONFIG_BASICAUTH: false
     restart: unless-stopped
   
-  alpine:
-    image: alpine
-    container_name: alpine-test
-    command: tail -F /dev/null
+  # alpine:
+  #   image: alpine
+  #   container_name: alpine-test
+  #   command: tail -F /dev/null
 
 
 
