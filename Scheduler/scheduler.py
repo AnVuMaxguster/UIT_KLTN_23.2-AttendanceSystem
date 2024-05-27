@@ -1,4 +1,4 @@
-from mqtt_client import Paho_MQTT_Subcriber
+from mqtt_subscriber import Paho_MQTT_Subcriber
 import json
 import datetime
 
@@ -52,6 +52,7 @@ if __name__ == "__main__":
         mqtt_subscriber.start_listening()
     except KeyboardInterrupt:
         # Handle keyboard interrupt
+        print()
         print("Keyboard interrupt received. Disconnecting gracefully.")
         mqtt_subscriber.stop_listening()
 
