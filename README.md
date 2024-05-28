@@ -1,1 +1,1 @@
-# AnVuMaxguster-UIT_KLTN_23.2-AttendanceSystem
+# UIT_KLTN_23.2-AttendanceSystem
