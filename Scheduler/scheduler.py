@@ -1,4 +1,5 @@
 from mqtt_subscriber import Paho_MQTT_Subcriber
+from crontab import CronTab
 import json
 import datetime
 
@@ -9,39 +10,46 @@ password = "brucewayne"
 
 topic = "@gothamcity"
 
-def callback_func(client, userdata, message):
-    ## userdata is the structure we choose to provide, here it's a list()
-    # userdata.append(message.payload)
-    # print(str(message.payload.decode("utf-8")))
+def schedule_task(start, month, day, hour, minute):
+    syntax = f"{minute} {hour} {day} {month} *"
+    if start:
+        cron = CronTab(user='ubuntu')
 
-    ## Testing on Sample JSON
-    json_data = json.loads(message.payload.decode("utf-8"))
-    print(json_data["name"])
-    print(json_data["address"]["state"])
-    print(json_data["tags"][2])
+        job = cron.new(command='/home/ubuntu/anvu/AnVuMaxguster-UIT_KLTN_23.2-AttendanceSystem/Scheduler/script.sh', comment='Publish datetime') # Set command to run & job description (comment)
+        job.setall(syntax) # Set the time
+        if job.is_valid():
+            comment = job.comment
+            print(f"Job scheduled ! Job comment: {comment}")
+            cron.write()
 
 
-    ## Testing for UNIX data ( from JSON as well )
+def extract_date(start, date_str):
+    # Parse the date string into a datetime object
+    date_obj = datetime.datetime.strptime(date_str, "%b %d, %Y, %I:%M:%S %p")
+
+    # Convert the datetime object to a Unix timestamp
+    unix_timestamp = int(date_obj.timestamp())
+
     # Convert Unix timestamp to datetime object
-    # json_data = json.loads(message.payload.decode("utf-8"))
-    # date_data = json_data["date"]
-    # datetime_obj = datetime.datetime.fromtimestamp(date_data)
+    datetime_obj= datetime.datetime.fromtimestamp(unix_timestamp)
 
-    # year = datetime_obj.year
-    # month = datetime_obj.month
-    # day = datetime_obj.day
-    # hour = datetime_obj.hour
-    # minute = datetime_obj.minute
-    # second = datetime_obj.second
+    # Extract each field separately (int)
+    month = datetime_obj.month
+    day = datetime_obj.day
+    hour = datetime_obj.hour
+    minute = datetime_obj.minute
 
-    # print("Year:", year)
-    # print("Month:", month)
-    # print("Day:", day)
-    # print("Hour:", hour)
-    # print("Minute:", minute)
-    # print("Second:", second)
-    
-    # print()
+    schedule_task(start, month, day, hour, minute)
+
+def callback_func(client, userdata, message):
+    json_data = json.loads(message.payload.decode("utf-8"))
+    # Date string (Start)
+    date_str = json_data["date_start"]
+    extract_date(True, date_str)
+
+    # Date string (End)
+    date_str = json_data["date_end"]
+    extract_date(False, date_str)
 
 if __name__ == "__main__":
     mqtt_subscriber = Paho_MQTT_Subcriber(broker_ip, port, username, password)
@@ -55,17 +63,3 @@ if __name__ == "__main__":
         print()
         print("Keyboard interrupt received. Disconnecting gracefully.")
         mqtt_subscriber.stop_listening()
-
-# Sample JSON
-# {
-#   "name": "John Doe",
-#   "age": 30,
-#   "email": "johndoe@example.com",
-#   "address": {
-#     "street": "123 Main St",
-#     "city": "Anytown",
-#     "state": "CA",
-#     "zipcode": "12345"
-#   },
-#   "tags": ["developer", "musician", "reader"]
-# }
