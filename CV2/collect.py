@@ -131,7 +131,7 @@ def get_facedata(model, student_data_dir):
 
 if __name__ == "__main__":
     model = load_model()
-    dataset_directory = "dataset"
+    dataset_directory = "D:\KLTN - Code\dataset"
     while True: 
         operation, student_data_dir  = choose_operation(dataset_directory)
         # If user chooses to create/add dataset
