@@ -1,7 +1,12 @@
 import cv2
+import time
 
 # Open the camera
 cap = cv2.VideoCapture(0)  # Use 0 for the default camera, change to 1, 2, etc. for other cameras
+
+# cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
+# cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
+# time.sleep(5)
 
 # Check if the camera opened successfully
 if not cap.isOpened():

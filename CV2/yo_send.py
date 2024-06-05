@@ -28,7 +28,7 @@ def delivery_report(err, msg):
     else:
         print(f'Message delivered to {msg.topic()} [{msg.partition()}]')
 
-def camera_inference(model):
+def camera_inference(model, kafka_config):
     cap = cv2.VideoCapture(0)  
 
     if not cap.isOpened():
