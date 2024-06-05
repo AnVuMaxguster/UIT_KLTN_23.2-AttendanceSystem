@@ -45,6 +45,8 @@ public class Member_Class {
 
     private Boolean present;
     private Double attendance_percents;
+    private Double ble_percents;
+    private Double facial_percents;
     @Column(columnDefinition = "TEXT")
     private String attendance_log;
 //    public String getId() {

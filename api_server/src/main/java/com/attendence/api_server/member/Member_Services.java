@@ -46,7 +46,7 @@ public class Member_Services {
         return memberRepository.findByUsernameContainingIgnoreCase(search);
     }
     @Transactional
-    public Member updateById(PutRequest putRequest, Member requester) throws Exception
+    public Member  updateById(PutRequest putRequest, Member requester) throws Exception
     {
         if(!Member.hasAdminPrivileges(requester) && requester.getId()!=putRequest.getItemId())
         {
@@ -55,14 +55,49 @@ public class Member_Services {
         Member member=memberRepository.findById(putRequest.getItemId())
                 .orElseThrow(()->new IllegalStateException("Member with id "+putRequest.getItemId()+" does not exist."));
         String property=putRequest.getProperty();
-        if(putRequest.getValue()!=null) {
+        if(putRequest.getValue()!=null && put_Exceptions(member,putRequest,requester)) {
             java.lang.Class valueClass = putRequest.getValue().getClass();
             Method setter = member.getClass().getMethod(property, valueClass);
             setter.invoke(member, putRequest.getValue());
         }
         return member;
     }
+    private boolean put_Exceptions(Member target,PutRequest putRequest,Member requester)
+    {
+        boolean flag=true;
+        switch (putRequest.getProperty())
+        {
+            case "setBleMac":
+                Optional<Date> targetUpdateBle_time= Optional.ofNullable(target.getBleUpdateTime());
+                if( targetUpdateBle_time.isPresent())
+                {
+                    long current_time=new Date().getTime();
+                    long convertTargetUpdateBle_time=targetUpdateBle_time.get().getTime();
+                    if((current_time-convertTargetUpdateBle_time)/3600000<=1440) {
+                        if (!Member.hasAdminPrivileges(requester)) {
+                            flag = false;
+                            throw new IllegalStateException(1440 - (current_time-convertTargetUpdateBle_time)/3600000 + " hours until BleMac can be changed");
+                        }
+                    }
+                }
+                break;
+            case "setBleUpdateTime":
+                if(!Member.hasAdminPrivileges(requester)) {
+                    flag = false;
+                    throw new IllegalStateException("Unauthorized for this service");
 
+                }
+
+                break;
+        }
+        return flag;
+    }
+    public List<Member> getAllStudent(Member requester)
+    {
+        if(!Member.hasLecturePrivileges(requester))
+            throw new IllegalStateException("Unauthorized for this service");
+        return memberRepository.findByRole(Role.STUDENT);
+    }
     public List<Map<String,Object>> getAllClasses(Member requester, Member target)
     {
         if(!Member.hasLecturePrivileges(requester) && requester.getId()!= target.getId())

@@ -1,6 +1,7 @@
 package com.attendence.api_server.Authentication;
 
 import com.attendence.api_server.JWT.JwtServices;
+import com.attendence.api_server.PutRequest;
 import com.attendence.api_server.member.Member;
 import com.attendence.api_server.member.Member_Services;
 import com.attendence.api_server.member.Member_repository;
@@ -89,7 +90,7 @@ public class Authentication_Services {
 //                "The provided code is not correct or user did not request to reset password !"
 //        );
 //    }
-    public AuthenticationResponse authenticate(AuthenticationRequest authenticationRequest) {
+    public AuthenticationResponse authenticate(AuthenticationRequest authenticationRequest){
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         authenticationRequest.getUsername(),

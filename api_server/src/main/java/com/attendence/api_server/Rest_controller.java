@@ -270,6 +270,18 @@ public class Rest_controller {
                 null
         );
     }
+    @GetMapping("/member/all")
+    public ResponseEntity<?> getAllMember()
+    {
+        try
+        {
+            return ResponseEntity.ok(memberServices.getAllStudent(getCurrentSessionMember()));
+        }
+        catch (Exception e)
+        {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
     @GetMapping("/member/search")
     public ResponseEntity<?> findMember_ByUsername(
             @RequestParam(name = "username") String username

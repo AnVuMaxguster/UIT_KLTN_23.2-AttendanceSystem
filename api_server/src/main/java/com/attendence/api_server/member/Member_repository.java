@@ -12,4 +12,6 @@ public interface Member_repository extends JpaRepository<Member,Long> {
     Optional<Member> findByEmail(String email);
 
     List<Member>findByUsernameContainingIgnoreCase(String search);
+
+    List<Member>findByRole(Role role);
 }

@@ -101,7 +101,7 @@ public class Class_Services {
             Method setter = aclass.getClass().getMethod(property, valueClass);
             setter.invoke(aclass, putRequest.getValue());
         }
-        sendObjectMqtt(aclass,"/mqtt/class/put");
+//        sendObjectMqtt(aclass,"/mqtt/class/put");
         return aclass;
     }
 
@@ -113,14 +113,17 @@ public class Class_Services {
         }
         return classRepository.findAll();
     }
-    public Map<String,Long> getMembersName(long class_id, Member requester)
+    public Map<String,Object> getMembersName(long class_id, Member requester)
     {
         Class selectClass=getClassByID(class_id,requester);
-        Map<String,Long> result=new HashMap<>();
+        Map<String,Object> result=new HashMap<>();
         for(Member_Class memberClass : selectClass.getMembers())
         {
+            Map<String,Object> temp=new HashMap<>();
             Member member=memberClass.getMember();
-            result.put(member.getUsername(),member.getId());
+            temp.put("id",member.getId());
+            temp.put("bleMac",member.getBleMac());
+            result.put(member.getUsername(),temp);
         }
         return result;
     }

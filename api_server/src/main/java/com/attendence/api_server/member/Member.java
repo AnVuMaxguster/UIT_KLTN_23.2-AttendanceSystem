@@ -7,9 +7,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Entity(name = "Member")
 @Table
@@ -50,6 +50,11 @@ public class Member implements UserDetails {
 
     @JsonIgnore
     private String resetPassCode;
+
+    private String bleMac;
+
+    private Date bleUpdateTime;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
@@ -181,5 +186,25 @@ public class Member implements UserDetails {
     public static boolean hasLecturePrivileges(Member requester)
     {
         return requester!=null && requester.getRole() != null && (requester.getRole() == Role.ADMIN||requester.getRole()==Role.LECTURE);
+    }
+
+    public String getBleMac() {
+        return bleMac;
+    }
+
+    public void setBleMac(String bleMac) {
+        this.bleMac = bleMac;
+        this.bleUpdateTime=new Date();
+    }
+
+    public Date getBleUpdateTime() {
+        return bleUpdateTime;
+    }
+
+    public void setBleUpdateTime(String bleUpdateTime) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+7"));
+        Date date = dateFormat.parse(bleUpdateTime);
+        this.bleUpdateTime=date;
     }
 }
