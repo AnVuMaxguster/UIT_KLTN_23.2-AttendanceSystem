@@ -165,6 +165,20 @@ public class Rest_controller {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+    @GetMapping("/class/search")
+    public ResponseEntity<?> findClass_ByClassName(
+            @RequestParam(name = "className") String className
+    )
+    {
+        try
+        {
+            return ResponseEntity.ok(classServices.findClassByName(className,getCurrentSessionMember()));
+        }
+        catch (Exception e)
+        {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
     @GetMapping("/class/member/name")
     public ResponseEntity<?> getMembersNameByClassId(
             @RequestParam(name = "class_id") long id
@@ -352,5 +366,21 @@ public class Rest_controller {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @DeleteMapping("/member")
+    public ResponseEntity<?> deleteMember(
+            @RequestParam(name = "id") long id
+    )
+    {
+        try
+        {
+            return ResponseEntity.ok(memberServices.deleteMemberById(id,getCurrentSessionMember()));
+        }
+        catch (Exception e)
+        {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
     //Member----------------------------------------
 }

@@ -51,6 +51,16 @@ public class Class_Services {
 
         }
     }
+
+    public List<Class> findClassByName(String classname,Member requester)
+    {
+        if(!Member.hasLecturePrivileges(requester))
+        {
+            throw new IllegalStateException("Unauthorized for this service");
+        }
+        return classRepository.findByClass_nameContainingIgnoreCase(classname);
+    }
+
     @Transactional
     public String deleteClassById(long id,Member requester)
     {

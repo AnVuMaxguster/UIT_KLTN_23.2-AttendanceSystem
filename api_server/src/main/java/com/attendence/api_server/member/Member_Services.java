@@ -3,6 +3,7 @@ package com.attendence.api_server.member;
 import com.attendence.api_server.Authentication.RegisterRequest;
 import com.attendence.api_server.Class.Class;
 import com.attendence.api_server.Member_Class.Member_Class;
+import com.attendence.api_server.Member_Class.Member_Class_repository;
 import com.attendence.api_server.PutRequest;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -15,9 +16,11 @@ import java.util.*;
 @Service
 public class Member_Services {
     private final Member_repository memberRepository;
+    private final Member_Class_repository memberClassRepository;
 
-    public Member_Services(Member_repository memberRepository) {
+    public Member_Services(Member_repository memberRepository, Member_Class_repository memberClassRepository) {
         this.memberRepository = memberRepository;
+        this.memberClassRepository=memberClassRepository;
     }
 
 
@@ -151,5 +154,26 @@ public class Member_Services {
             }
         }
         return unfinishedClasses;
+    }
+
+    @Transactional
+    public String deleteMemberById(long id,Member requester)
+    {
+        if(!Member.hasAdminPrivileges(requester))
+        {
+            throw new IllegalStateException("Unauthorized for this service");
+        }
+        Member member=getMemberById(id);
+        Set<Member_Class> memberClasses=member.getClasses();
+        for(Member_Class memberClass : memberClasses)
+        {
+            memberClass.getAClass().getMembers().remove(memberClass);
+            memberClass.setMember(null);
+            memberClass.setAClass(null);
+            memberClassRepository.delete(memberClass);
+        }
+        member.getClasses().clear();
+        memberRepository.deleteById(id);
+        return "Member id "+id+" deleted.";
     }
 }
