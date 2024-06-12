@@ -98,6 +98,12 @@ public class Member_Services {
             throw new IllegalStateException("Unauthorized for this service");
         return memberRepository.findByRole(Role.STUDENT);
     }
+    public List<Member> getAllMember(Member requester)
+    {
+        if(!Member.hasLecturePrivileges(requester))
+            throw new IllegalStateException("Unauthorized for this service");
+        return  memberRepository.findAll();
+    }
     public List<Map<String,Object>> getAllClasses(Member requester, Member target)
     {
         if(!Member.hasLecturePrivileges(requester) && requester.getId()!= target.getId())

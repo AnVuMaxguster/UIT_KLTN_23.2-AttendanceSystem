@@ -23,7 +23,7 @@ import java.util.TimeZone;
 @Getter
 @Setter
 //@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
-public class    Class {
+public class Class {
     @Id
     @SequenceGenerator(
             name="class_sq",

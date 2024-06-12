@@ -7,6 +7,7 @@ import com.attendence.api_server.Member_Class.Member_Class_repository;
 import com.attendence.api_server.MqttGateway;
 import com.attendence.api_server.PutRequest;
 import com.attendence.api_server.member.Member;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -39,8 +40,10 @@ public class Class_Services {
     public void sendObjectMqtt(Object obj, String topic)
     {
         try {
-            Gson gson = new Gson();
-            String data = gson.toJson(obj);
+//            Gson gson = new Gson();
+//            String data = gson.toJson(obj);
+            ObjectMapper objectMapper = new ObjectMapper();
+            String data=objectMapper.writeValueAsString(obj);
             mqttGateway.sendToMqtt(data, topic);
         }
         catch (Exception e)
@@ -101,7 +104,8 @@ public class Class_Services {
             Method setter = aclass.getClass().getMethod(property, valueClass);
             setter.invoke(aclass, putRequest.getValue());
         }
-//        sendObjectMqtt(aclass,"/mqtt/class/put");
+        sendObjectMqtt(aclass,"/mqtt/class/put");
+
         return aclass;
     }
 

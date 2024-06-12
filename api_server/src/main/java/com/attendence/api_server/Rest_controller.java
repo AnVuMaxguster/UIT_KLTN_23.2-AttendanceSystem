@@ -271,11 +271,23 @@ public class Rest_controller {
         );
     }
     @GetMapping("/member/all")
-    public ResponseEntity<?> getAllMember()
+    public ResponseEntity<?> getAllStudent()
     {
         try
         {
             return ResponseEntity.ok(memberServices.getAllStudent(getCurrentSessionMember()));
+        }
+        catch (Exception e)
+        {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+    @GetMapping("/member/full")
+    public ResponseEntity<?> getAllMember()
+    {
+        try
+        {
+            return ResponseEntity.ok(memberServices.getAllMember(getCurrentSessionMember()));
         }
         catch (Exception e)
         {
