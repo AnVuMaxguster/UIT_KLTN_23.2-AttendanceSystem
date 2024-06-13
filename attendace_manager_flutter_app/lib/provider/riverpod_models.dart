@@ -16,7 +16,7 @@ import 'package:attendace_manager_flutter_app/provider/navigation_rail_provider.
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final ChangeNotifierProvider navigation_bar_index_provider=ChangeNotifierProvider<navigation_bar_index>((ref) => navigation_bar_index(0));
-final ChangeNotifierProvider first_screen_Controller=ChangeNotifierProvider<First_Screen_Controller>((ref) => First_Screen_Controller(false,"springapi:8080"));
+final ChangeNotifierProvider first_screen_Controller=ChangeNotifierProvider<First_Screen_Controller>((ref) => First_Screen_Controller(false,"localhost:8080"));
 final ChangeNotifierProvider login_screen_Controller=ChangeNotifierProvider<LoginChangeNotifier>((ref) => LoginChangeNotifier(true));
 final ChangeNotifierProvider account_Controller=ChangeNotifierProvider<Account_ChangeNotifier>((ref) => Account_ChangeNotifier(Member(-1, "name", "email", Role.STUDENT, List.empty(), "description", "display_name")));
 final ChangeNotifierProvider classes_Controller=ChangeNotifierProvider<ClassesChangeNotifier>((ref) => ClassesChangeNotifier());
