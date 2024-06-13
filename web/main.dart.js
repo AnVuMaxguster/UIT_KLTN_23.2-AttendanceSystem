@@ -50104,7 +50104,7 @@ $1(a){return new A.ll(0,$.ae())},
 $S:365}
 A.awn.prototype={
 $1(a){var s=$.ae()
-return new A.kx(!1,"192.168.120.72:8080",new A.dO(B.aF,s),s)},
+return new A.kx(!1,"springapi:8080",new A.dO(B.aF,s),s)},
 $S:366}
 A.awZ.prototype={
 $1(a){return new A.kI(!0,$.ae())},
