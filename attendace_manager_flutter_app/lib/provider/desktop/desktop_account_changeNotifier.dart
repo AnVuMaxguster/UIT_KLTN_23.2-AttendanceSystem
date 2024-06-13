@@ -9,7 +9,9 @@ class Desktop_account_changeNotifier extends ChangeNotifier
 {
   List<Member> _allStudents=[];
   List<Member> _allMembers=[];
+  List<Member> _findMembers=[];
   bool _isLoading = false;
+  bool _use_search_result=false;
   Desktop_account_changeNotifier();
 
 
@@ -17,6 +19,22 @@ class Desktop_account_changeNotifier extends ChangeNotifier
 
   set allMembers(List<Member> value) {
     _allMembers = value;
+    notifyListeners();
+  }
+
+
+  List<Member> get findMembers => _findMembers;
+
+  set findMembers(List<Member> value) {
+    _findMembers = value;
+    notifyListeners();
+  }
+
+
+  bool get use_search_result => _use_search_result;
+
+  set use_search_result(bool value) {
+    _use_search_result = value;
     notifyListeners();
   }
 
@@ -45,6 +63,27 @@ class Desktop_account_changeNotifier extends ChangeNotifier
     else
       print("request all student failed");
   }
+
+  void findMembersByUsername(WidgetRef ref,String username) async
+  {
+    use_search_result=true;
+    if (username=="")
+      {
+        use_search_result=false;
+        _findMembers=[];
+        notifyListeners();
+        return;
+      }
+    final response= await find_member_by_username(ref.read(first_screen_Controller as ChangeNotifierProvider<First_Screen_Controller>).ipAddress,username);
+    if (response!=null)
+    {
+      _findMembers=response;
+      notifyListeners();
+    }
+    else
+      print("find member failed");
+  }
+
   void requestAllMembers(WidgetRef ref) async
   {
     final reponse= await request_all_members(ref.read(first_screen_Controller as ChangeNotifierProvider<First_Screen_Controller>).ipAddress);
@@ -82,6 +121,15 @@ class Desktop_account_changeNotifier extends ChangeNotifier
   {
     final response=await delete_account(ref.read(first_screen_Controller as ChangeNotifierProvider<First_Screen_Controller>).ipAddress,memberId);
     return response ?? false;
+  }
+
+
+  reset_all_member()
+  {
+    _allMembers=[];
+    _allStudents=[];
+    _findMembers=[];
+    notifyListeners();
   }
 
 }

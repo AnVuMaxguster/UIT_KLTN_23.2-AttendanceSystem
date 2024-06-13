@@ -145,7 +145,9 @@ class desktop_account_screen extends ConsumerWidget {
                               ),
                             ),
                             ElevatedButton(
-                                onPressed: (){},
+                                onPressed: (){
+                                  ref.read(desktop_account_Controller as ChangeNotifierProvider<Desktop_account_changeNotifier>).findMembersByUsername(ref,Search_box_controller.text);
+                                },
                                 style: ButtonStyle(
                                   backgroundColor: MaterialStateProperty.all(Colors.orange),
                                 ),
@@ -193,11 +195,17 @@ class desktop_account_screen extends ConsumerWidget {
                   ),
                   child: ListView.separated(
                       scrollDirection: Axis.vertical,
-                      itemCount: ref.watch(desktop_account_Controller as ChangeNotifierProvider<Desktop_account_changeNotifier>).allMembers.length,
+                      itemCount: ((){
+                        return ref.watch(desktop_account_Controller as ChangeNotifierProvider<Desktop_account_changeNotifier>).use_search_result? ref.watch(desktop_account_Controller as ChangeNotifierProvider<Desktop_account_changeNotifier>).findMembers.length : ref.watch(desktop_account_Controller as ChangeNotifierProvider<Desktop_account_changeNotifier>).allMembers.length;
+                      })(),
                       // itemCount: demo.length,
                       itemBuilder: (context,index)
                       {
-                        Member currentMember=ref.watch(desktop_account_Controller as ChangeNotifierProvider<Desktop_account_changeNotifier>).allMembers[index];
+                        final selected_account_collection=(()
+                        {
+                          return ref.watch(desktop_account_Controller as ChangeNotifierProvider<Desktop_account_changeNotifier>).use_search_result? ref.watch(desktop_account_Controller as ChangeNotifierProvider<Desktop_account_changeNotifier>).findMembers : ref.watch(desktop_account_Controller as ChangeNotifierProvider<Desktop_account_changeNotifier>).allMembers;
+                        })();
+                        Member currentMember=selected_account_collection[index];
                         return account_box_item_builder(
                           item: currentMember,
                           isFirstItem: index==0,

@@ -144,6 +144,36 @@ request_self_member(String address)async
   }
 }
 
+find_member_by_username(String address,String username)async
+{
+  final uri=Uri.http(address,"/api/member/search",{
+    "username":username
+  });
+  try
+  {
+    var response = await http.get(
+        uri,
+        headers:
+        {
+          "Authorization": "Bearer-" + using_token,
+          'Access-Control-Allow-Origin': '*'
+        }
+    ).timeout(Duration(seconds: 10));
+    return response.statusCode == 200
+        ?
+    (() {
+      print("find_members_success");
+      final json_list=(jsonDecode(response.body) as List).cast<Map<String,dynamic>>();
+      return json_list.map((e) =>Member.fromJson(e as Map<String,dynamic>)).toList();
+    })()
+        : [];
+  }
+  catch(e)
+  {
+    print(e);
+  }
+}
+
 put_self_account(String address, PutRequest putRequest) async
 {
   final uri=Uri.http(address,"/api/member");
@@ -234,6 +264,7 @@ post_account(String address,Member member,String password) async
   }
 }
 
+
 delete_account(String address,int id) async
 {
   final uri=Uri.http(address,"/api/member",
@@ -282,6 +313,39 @@ post_class(String address,Class aclass) async
       })()
     ).timeout(Duration(seconds: 10));
     return response.statusCode == 200 ;
+  }
+  catch(e)
+  {
+    print(e);
+  }
+}
+
+find_class_by_classname(String address,String classname)async
+{
+  final uri=Uri.http(address,"/api/class/search",{
+    "className":classname
+  });
+  try
+  {
+    var response = await http.get(
+        uri,
+        headers:
+        {
+          "Authorization": "Bearer-" + using_token,
+          'Access-Control-Allow-Origin': '*'
+        }
+    ).timeout(Duration(seconds: 10));
+    return response.statusCode == 200
+        ?
+    (() {
+      print("find_classes_success");
+      var ListJson=(jsonDecode(response.body) as List).cast<Map<String,dynamic>>();
+
+      return ListJson.map((json){
+        return Class.fromJson(json as Map<String,dynamic>);
+      }).toList();
+    })()
+        : List.empty();
   }
   catch(e)
   {

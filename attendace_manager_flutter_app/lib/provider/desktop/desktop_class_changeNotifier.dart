@@ -11,7 +11,9 @@ class Desktop_class_changeNotifier extends ChangeNotifier
   DateTime _temp_Add_class_startTime;
   DateTime _temp_Add_class_endTime;
   bool _add_class_loading=false;
-  late List<Class> classes=[];
+  List<Class> classes=[];
+  List<Class> _findClasses=[];
+  bool _use_find_result=false;
 
 
   Desktop_class_changeNotifier(
@@ -22,6 +24,21 @@ class Desktop_class_changeNotifier extends ChangeNotifier
 
   set temp_Add_class_startTime(value) {
     _temp_Add_class_startTime = value;
+    notifyListeners();
+  }
+
+
+  bool get use_find_result => _use_find_result;
+
+  set use_find_result(bool value) {
+    _use_find_result = value;
+    notifyListeners();
+  }
+
+  List<Class> get findClasses => _findClasses;
+
+  set findClasses(List<Class> value) {
+    _findClasses = value;
     notifyListeners();
   }
 
@@ -71,6 +88,26 @@ class Desktop_class_changeNotifier extends ChangeNotifier
     );
   }
 
+  void findClassesByClassName(WidgetRef ref,String classname) async
+  {
+    use_find_result=true;
+    if (classname=="")
+    {
+      use_find_result=false;
+      _findClasses=[];
+      notifyListeners();
+      return;
+    }
+    final response= await find_class_by_classname(ref.read(first_screen_Controller as ChangeNotifierProvider<First_Screen_Controller>).ipAddress,classname);
+    if (response!=null)
+    {
+      _findClasses=response;
+      notifyListeners();
+    }
+    else
+      print("find classes failed");
+  }
+
   get temp_Add_class_endTime => _temp_Add_class_endTime;
 
   set temp_Add_class_endTime(value) {
@@ -91,4 +128,12 @@ class Desktop_class_changeNotifier extends ChangeNotifier
     _temp_Add_class_startTime=DateTime.now();
     notifyListeners();
   }
+
+  void reset_all_classes()
+  {
+    _findClasses=[];
+    classes=[];
+    notifyListeners();
+  }
+
 }

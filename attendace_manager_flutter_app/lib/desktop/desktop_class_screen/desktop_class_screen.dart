@@ -155,7 +155,9 @@ class desktop_class_screen extends ConsumerWidget {
                               ),
                             ),
                             ElevatedButton(
-                                onPressed: (){},
+                                onPressed: (){
+                                  ref.read(desktop_class_screen_Controller as ChangeNotifierProvider<Desktop_class_changeNotifier>).findClassesByClassName(ref, Search_box_controller.text);
+                                },
                                 style: ButtonStyle(
                                   backgroundColor: MaterialStateProperty.all(Colors.green),
                                 ),
@@ -203,11 +205,34 @@ class desktop_class_screen extends ConsumerWidget {
                   ),
                   child: ListView.separated(
                       scrollDirection: Axis.vertical,
-                      itemCount: ref.watch(desktop_class_screen_Controller as ChangeNotifierProvider<Desktop_class_changeNotifier>).classes.length,
+                      itemCount: ((){
+                        return ref.watch(
+                            desktop_class_screen_Controller as ChangeNotifierProvider<Desktop_class_changeNotifier>
+                        ).use_find_result ?
+                        ref.watch(
+                            desktop_class_screen_Controller as ChangeNotifierProvider<Desktop_class_changeNotifier>
+                        ).findClasses.length
+                            :
+                        ref.watch(
+                            desktop_class_screen_Controller as ChangeNotifierProvider<Desktop_class_changeNotifier>
+                        ).classes.length;
+                      })(),
                       // itemCount: demo.length,
                       itemBuilder: (context,index)
                       {
-                        Class currentClass=ref.watch(desktop_class_screen_Controller as ChangeNotifierProvider<Desktop_class_changeNotifier>).classes[index];
+                        final selectes_classes_collection=((){
+                          return ref.watch(
+                              desktop_class_screen_Controller as ChangeNotifierProvider<Desktop_class_changeNotifier>
+                          ).use_find_result ?
+                          ref.watch(
+                              desktop_class_screen_Controller as ChangeNotifierProvider<Desktop_class_changeNotifier>
+                          ).findClasses
+                              :
+                          ref.watch(
+                              desktop_class_screen_Controller as ChangeNotifierProvider<Desktop_class_changeNotifier>
+                          ).classes;
+                        })();
+                        Class currentClass=selectes_classes_collection[index];
                         // Class currentClass=demo[index];
                         return class_box_item_builder(
                           item: currentClass,
