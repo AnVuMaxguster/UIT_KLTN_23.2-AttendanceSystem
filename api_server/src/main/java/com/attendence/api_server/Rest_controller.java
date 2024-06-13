@@ -21,6 +21,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(path = ("/api"))
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class Rest_controller {
     private final Member_Services memberServices;
     private final Authentication_Services authenticationServices;
