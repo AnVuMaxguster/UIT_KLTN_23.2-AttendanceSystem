@@ -4,10 +4,18 @@ import 'package:attendace_manager_flutter_app/desktop/desktop_main_screen.dart';
 import 'package:attendace_manager_flutter_app/mobile/mobile_login_screen.dart';
 import 'package:attendace_manager_flutter_app/mobile/mobile_main_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
   runApp(ProviderScope(child: MyApp()));
+  // WidgetsFlutterBinding.ensureInitialized();
+  // SystemChrome.setPreferredOrientations([
+  //   DeviceOrientation.portraitUp,
+  //   DeviceOrientation.portraitDown,
+  // ]).then((_) {
+  //   runApp(ProviderScope(child: MyApp()));
+  // });
 }
 
 class MyApp extends StatelessWidget {
@@ -31,15 +39,24 @@ class MyHomePage extends ConsumerWidget
 {
 
   bool isMobile(BuildContext context) => MediaQuery.of(context).size.width <= 600;
+  bool isMinimumAllowed(BuildContext context) => MediaQuery.of(context).size.width >= 800 && MediaQuery.of(context).size.height>=600;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    if(isMobile(context))
-      return Stack(
-        children: [
-          mobile_main_screen(),
-          mobile_login_screen(),
-          First_Screen(),
-        ],
+    if(!isMinimumAllowed(context))
+      // return Stack(
+      //   children: [
+      //     mobile_main_screen(),
+      //     mobile_login_screen(),
+      //     First_Screen(),
+      //   ],
+      // );
+      return Container(
+        color: Colors.white,
+        child: Center(
+          child: Text(
+            "Minimum window size exceeded!"
+          ),
+        ),
       );
     else
       return
