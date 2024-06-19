@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:attendace_manager_flutter_app/provider/login_screen_changeNotifier.dart';
 import 'package:attendace_manager_flutter_app/provider/riverpod_models.dart';
 import 'package:flutter/cupertino.dart';
@@ -27,9 +29,26 @@ class desktop_login_screen extends ConsumerWidget{
                 child: Container(
                   height: double.infinity,
                   width: double.infinity,
-                  child: Image(
-                    fit: BoxFit.cover,
-                      image:AssetImage("images/login_bg_troll.jpg")
+                  child: Stack(
+                    children: [
+                      Container(
+                        height: double.infinity,
+                        width: double.infinity,
+                        child: Image(
+                          fit: BoxFit.cover,
+                            // image:AssetImage("images/login_bg_troll.jpg")
+                          image: NetworkImage("https://i.pinimg.com/736x/61/13/50/611350f928e39c380aed4dd425078aa8.jpg"),
+                        ),
+                      ),
+                      Positioned.fill(
+                        child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
+                        child: Container(
+                          color: Colors.black.withOpacity(0),
+                        ),
+                      ),
+                      )
+                    ],
                   ),
                 ),
               ),
