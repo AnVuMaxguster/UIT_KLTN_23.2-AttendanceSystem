@@ -37,7 +37,7 @@ class desktop_login_screen extends ConsumerWidget{
                         child: Image(
                           fit: BoxFit.cover,
                             // image:AssetImage("images/login_bg_troll.jpg")
-                          image: NetworkImage("https://i.pinimg.com/736x/61/13/50/611350f928e39c380aed4dd425078aa8.jpg"),
+                            image:AssetImage("images/official_bg.jpg")
                         ),
                       ),
                       Positioned.fill(
