@@ -43,6 +43,7 @@ services:
 
   mongo-express:
     image: mongo-express
+    container_name: mongo-express
     ports:
       - 8081:8081
     environment:
@@ -50,6 +51,13 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: admin
       ME_CONFIG_MONGODB_URL: mongodb://admin:admin@mongodb:27017/
       ME_CONFIG_BASICAUTH: false
+    restart: unless-stopped
+
+  flask-sample:
+    container_name: dummy-flask-app
+    build: ./LetSee
+    ports:
+      - 6060:6060
     restart: unless-stopped
   
   # alpine:
