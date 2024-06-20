@@ -21,6 +21,7 @@ def produce_img(kafka_config, topic, image_dir):
 
     for root, dirs, files in os.walk(image_dir):
         for file in files:
+            start_time = perf_counter() # Start timer
             if any(file.lower().endswith(ext) for ext in image_extensions):
                 image_path = os.path.join(root, file)
 
@@ -34,16 +35,15 @@ def produce_img(kafka_config, topic, image_dir):
                     # Convert to string for message passing
                     encoded_image_str = encoded_image.decode('utf-8')
                     
-                    start_time = perf_counter() # Start timer
                     # Publish the image data to Kafka topic
                     producer.produce(topic, value=encoded_image_str.encode('utf-8'), callback=delivery_report)
-                    end_time = perf_counter()   # Stop timer
                     count+=1
-                    print(f"{end_time-start_time} s")
 
                 # Block until the messages are sent.
                 producer.poll(10000)
                 producer.flush()
+                end_time = perf_counter()   # Stop timer
+                print(f"{end_time-start_time} s")
                
 
 if __name__ == '__main__':
@@ -52,7 +52,7 @@ if __name__ == '__main__':
     }
 
     topic = "images"
-    image_dir= r"C:\Users\ASUS\Desktop\KLTN\Kafka Client\pub_data\faceset"
+    image_dir= r"D:\KLTN - Code\AnVuMaxguster-UIT_KLTN_23.2-AttendanceSystem\Kafka Client\pub_data"
 
     start_time = perf_counter() # Start timer
     produce_img(kafka_config, topic, image_dir)

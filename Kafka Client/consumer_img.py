@@ -38,7 +38,7 @@ if __name__ == '__main__':
                     break
             # Decode the base64-encoded image data
             decoded_image = base64.b64decode(msg.value().decode('utf-8'))
-            filename = os.path.join(r"C:\Users\ASUS\Desktop\KLTN\Kafka Client\sub_data", f"{count}.jpg")
+            filename = os.path.join(r"D:\KLTN - Code\AnVuMaxguster-UIT_KLTN_23.2-AttendanceSystem\Kafka Client\sub_data", f"{count}.jpg")
             # Save the image to a file
             save_image(decoded_image, filename)  # Save image as received_image.jpg
             print("Image received and saved successfully.")

@@ -10,7 +10,7 @@ model = torch.hub.load('ultralytics/yolov5', 'custom', path='weight/best.pt', fo
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 print("\n\nDevice Used:", device)
 model.to(device)
-model.conf=0.8
+model.conf=0.7
 # model.max_det=1
 
 cap = cv2.VideoCapture(0)  

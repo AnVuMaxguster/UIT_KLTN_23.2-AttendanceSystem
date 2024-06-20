@@ -1,5 +1,6 @@
 import cv2
 import time
+import imutils
 
 # Open the camera
 cap = cv2.VideoCapture(0)  # Use 0 for the default camera, change to 1, 2, etc. for other cameras
@@ -17,6 +18,7 @@ if not cap.isOpened():
 while True:
     # Capture frame-by-frame
     ret, frame = cap.read()
+    frame = imutils.resize(frame, width=640)
 
     # Check if the frame was successfully captured
     if not ret:
