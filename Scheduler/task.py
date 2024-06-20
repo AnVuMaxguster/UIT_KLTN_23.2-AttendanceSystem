@@ -1,6 +1,7 @@
 # THIS IS A TESTING TASK, LATER WILL BE REPLACE WITH FACE RECOGNITION SCRIPT
 import time
 import paho.mqtt.client as mqtt
+import argparse
 from datetime import datetime
 
 def on_publish(client, userdata, mid, reason_code, properties):
@@ -37,12 +38,12 @@ mqttc.loop_start()
 # Get the current date and time
 now = datetime.now()
 
-# Format the current date and time
-current_date_time = now.strftime("%Y-%m-%d %H:%M:%S")
-#----------------------------------------------
-
+argparse=argparse.ArgumentParser("Arguments for script.")
+argparse.add_argument("--id",help="Class ID.",type=int)
+args=argparse.parse_args()
+data_to_publish = args.id
 # Our application produce some messages
-msg_info = mqttc.publish("@metropolis", current_date_time, qos=0)
+msg_info = mqttc.publish("@metropolis", data_to_publish, qos=0)
 unacked_publish.add(msg_info.mid)
 
 # Wait for all message to be published

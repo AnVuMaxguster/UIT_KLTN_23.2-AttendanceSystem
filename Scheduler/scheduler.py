@@ -2,59 +2,69 @@ from mqtt_subscriber import Paho_MQTT_Subcriber
 from crontab import CronTab
 import json
 import datetime
+from datetime import timezone, timedelta
 
 broker_ip = "192.168.120.46"
 port = 1883
 username = "batman"
 password = "brucewayne"
 
-topic = "@gothamcity"
+topic_post = "/mqtt/class/post"
+topic_put = "/mqtt/class/put"
+topic_del = "/mqtt/class/del"
 
-def schedule_task(start, month, day, hour, minute):
+def schedule_task(month, day, hour, minute, month_, day_, hour_, minute_, id):
     syntax = f"{minute} {hour} {day} {month} *"
-    if start:
-        cron = CronTab(user='ubuntu')
 
-        job = cron.new(command='/home/ubuntu/anvu/AnVuMaxguster-UIT_KLTN_23.2-AttendanceSystem/Scheduler/script.sh', comment='Publish datetime') # Set command to run & job description (comment)
-        job.setall(syntax) # Set the time
-        if job.is_valid():
-            comment = job.comment
-            print(f"Job scheduled ! Job comment: {comment}")
-            cron.write()
+    cron = CronTab(user='ubuntu')
 
+    job = cron.new(command=f'/home/ubuntu/anvu/AnVuMaxguster-UIT_KLTN_23.2-AttendanceSystem/Scheduler/script.sh {id}', comment='Publish MQTT') # Set command to run & job description (comment)
+    job.setall(syntax) # Set the time
+    if job.is_valid():
+        comment = job.comment
+        print(f"Job scheduled ! Job comment: {comment}")
+        cron.write()
 
-def extract_date(start, date_str):
-    # Parse the date string into a datetime object
-    date_obj = datetime.datetime.strptime(date_str, "%b %d, %Y, %I:%M:%S %p")
+def extract_date(time):
+    time = time / 1000.0 # Milisec to sec
+    # datetime_obj = datetime.datetime.fromtimestamp(time)
 
-    # Convert the datetime object to a Unix timestamp
-    unix_timestamp = int(date_obj.timestamp())
+    # datetime_obj = datetime.datetime.fromtimestamp(time, tz=timezone.utc)
+    
+    # # Convert to GMT+7
+    # datetime_obj = datetime_obj.astimezone(timezone(timedelta(hours=7)))
+    
+    # TESTING: input own timestamp
+    datetime_obj = datetime.datetime.fromtimestamp(1718892720)
 
-    # Convert Unix timestamp to datetime object
-    datetime_obj= datetime.datetime.fromtimestamp(unix_timestamp)
-
-    # Extract each field separately (int)
     month = datetime_obj.month
     day = datetime_obj.day
     hour = datetime_obj.hour
     minute = datetime_obj.minute
 
-    schedule_task(start, month, day, hour, minute)
+    return month,day,hour,minute
 
 def callback_func(client, userdata, message):
     json_data = json.loads(message.payload.decode("utf-8"))
-    # Date string (Start)
-    date_str = json_data["date_start"]
-    extract_date(True, date_str)
 
-    # Date string (End)
-    date_str = json_data["date_end"]
-    extract_date(False, date_str)
+    class_id = json_data["id"]
+    start_time = json_data["start_time"]
+    end_time = json_data["end_time"]
+
+    month,day,hour,minute = extract_date(start_time)
+    month_,day_,hour_,minute_ = extract_date(end_time)
+
+    print(f"{month} {day} {hour} {minute} {class_id}")
+
+    schedule_task(month, day, hour, minute, month_, day_, hour_, minute_, class_id)
 
 if __name__ == "__main__":
     mqtt_subscriber = Paho_MQTT_Subcriber(broker_ip, port, username, password)
     mqtt_subscriber.set_callback(callback_func)
-    mqtt_subscriber.subcribe(topic)
+    
+    mqtt_subscriber.subcribe(topic_post)
+    mqtt_subscriber.subcribe(topic_put)
+    mqtt_subscriber.subcribe(topic_del)
     
     try:
         mqtt_subscriber.start_listening()
