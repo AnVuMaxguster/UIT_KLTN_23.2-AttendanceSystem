@@ -8,14 +8,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
-  runApp(ProviderScope(child: MyApp()));
-  // WidgetsFlutterBinding.ensureInitialized();
-  // SystemChrome.setPreferredOrientations([
-  //   DeviceOrientation.portraitUp,
-  //   DeviceOrientation.portraitDown,
-  // ]).then((_) {
-  //   runApp(ProviderScope(child: MyApp()));
-  // });
+  // runApp(ProviderScope(child: MyApp()));
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]).then((_) {
+    runApp(ProviderScope(child: MyApp()));
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -42,7 +42,7 @@ class MyHomePage extends ConsumerWidget
   bool isMinimumAllowed(BuildContext context) => MediaQuery.of(context).size.width >= 800 && MediaQuery.of(context).size.height>=600;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    if(!isMinimumAllowed(context))
+    if(isMobile(context))
       // return Stack(
       //   children: [
       //     mobile_main_screen(),

@@ -6,10 +6,9 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+final TextEditingController _username_controller=TextEditingController();
+final TextEditingController _password_controller=TextEditingController();
 class mobile_login_screen extends ConsumerWidget {
-  final TextEditingController _username_controller=TextEditingController();
-  final TextEditingController _password_controller=TextEditingController();
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Visibility(
