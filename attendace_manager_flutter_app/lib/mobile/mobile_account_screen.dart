@@ -212,7 +212,7 @@ class update_ble_dialog extends ConsumerWidget{
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Expanded(
-                        flex:6,
+                        flex:5,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: Text(
@@ -228,12 +228,12 @@ class update_ble_dialog extends ConsumerWidget{
                         ),
                       ),
                       Expanded(
-                        flex: 4,
-                        child: Column(
+                        flex: 5,
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(bottom: 10),
+                              padding: const EdgeInsets.symmetric(horizontal: 10),
                               child: Container(
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(15),
@@ -260,7 +260,7 @@ class update_ble_dialog extends ConsumerWidget{
                                       "Submit",
                                       style: GoogleFonts.nunito(
                                         textStyle: TextStyle(
-                                            fontSize: 20,
+                                            fontSize: 10,
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
                                           height: 2
@@ -292,7 +292,7 @@ class update_ble_dialog extends ConsumerWidget{
                                     "Cancel",
                                     style: GoogleFonts.nunito(
                                       textStyle: TextStyle(
-                                          fontSize: 20,
+                                          fontSize: 10,
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,
                                           height: 2
