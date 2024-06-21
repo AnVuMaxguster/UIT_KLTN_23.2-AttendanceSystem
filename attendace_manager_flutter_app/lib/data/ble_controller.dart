@@ -50,7 +50,27 @@ class BleController extends GetxController{
   //   }
   // }
 
+  Future<void> requestPermissions() async {
+    var statusBluetooth = await Permission.bluetooth.request();
+    var statusBluetoothAdvertise = await Permission.bluetoothAdvertise.request();
+    var statusBluetoothConnect = await Permission.bluetoothConnect.request();
+    var statusBluetoothScan = await Permission.bluetoothScan.request();
+    var statusLocation = await Permission.location.request();
+
+    if (statusBluetooth.isGranted &&
+        statusBluetoothAdvertise.isGranted &&
+        statusBluetoothConnect.isGranted &&
+        statusBluetoothScan.isGranted &&
+        statusLocation.isGranted) {
+      print("All permissions granted");
+    } else {
+      print("One or more permissions were not granted");
+    }
+  }
   Future<void> makeDeviceDiscoverable() async {
+
+    await requestPermissions();
+
     final AndroidIntent intent = AndroidIntent(
       action: 'android.bluetooth.adapter.action.REQUEST_DISCOVERABLE',
       arguments: <String, dynamic>{

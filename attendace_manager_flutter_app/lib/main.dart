@@ -42,7 +42,7 @@ class MyHomePage extends ConsumerWidget
   bool isMinimumAllowed(BuildContext context) => MediaQuery.of(context).size.width >= 800 && MediaQuery.of(context).size.height>=600;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    if(isMobile(context))
+    if(!isMinimumAllowed(context))
       // return Stack(
       //   children: [
       //     mobile_main_screen(),

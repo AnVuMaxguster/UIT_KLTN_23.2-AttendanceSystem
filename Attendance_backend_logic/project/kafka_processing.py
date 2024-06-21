@@ -2,7 +2,7 @@ from confluent_kafka import Consumer, KafkaError
 import base64
 from project import http_requests
 from project.utilities import init_participants_dict,run_time_minutes,run_time_minutes_from,marking_frame_box,commit_attendance_results,final_attendance_results
-from project.pretrained_models.model_methods import realtime,prepare_model,regconition_model
+from project.pretrained_models.model_methods import realtime,prepare_model,regconition_model,prepare_model_noyolo
 import numpy as np
 from datetime import datetime
 import argparse
@@ -23,12 +23,16 @@ def get_cusom_Path_from_here(filename):
     thisLocationFolder=os.path.dirname(os.path.abspath(__file__))
     if filename!="":return os.path.join(thisLocationFolder,filename)
     return thisLocationFolder
-def facial_process(facial_usual_run,class_duration,class_start_time,class_end_time,consumer,facenet,svm_model,encoder,participants_dict,logger):
-    #type: (dict,float,datetime,datetime,any,FaceNet,any,LabelEncoder,dict,Logger)->bool
+def facial_process(facial_usual_run,class_duration,class_start_time,class_end_time,kafka_config,kafka_topic,participants_dict,logger_path):
+    #type: (dict,float,datetime,datetime,dict,str,dict,str)->bool
+    logger=clog("P1_log",os.path.join(logger_path,"P1_log.log")).setup_logger()
+    consumer=Init_Kafka_Consumer(kafka_config=kafka_config,topic=kafka_topic)
+    facenet,svm_model,encoder=prepare_model_noyolo()
     usual_run=False
     runtime=0
     while runtime<class_duration:
         msg = consumer.poll(timeout=1.0)
+        logger.debug(f"testing")
         if msg is None:
             continue
         if msg.error():
@@ -63,23 +67,30 @@ def facial_process(facial_usual_run,class_duration,class_start_time,class_end_ti
     if usual_run:
         final_attendance_results(participants_dict,class_duration)
     facial_usual_run["value"]=usual_run
+    consumer.close()
 
+
+def Init_Kafka_Consumer(kafka_config,topic):
+    #type: (dict,str)->any
+    consumer = Consumer(kafka_config)
+    # Subscribe to topic
+    topic = topic
+    consumer.subscribe([topic])
+    return consumer
         
-def main(kafkaHost,apiHost,kafkaTopic,account,classId,logger):
-    #type: (str,str,str,dict,int,Logger) -> None
+def main(kafkaHost,apiHost,kafkaTopic,account,classId,logger_path):
+    #type: (str,str,str,dict,int,str) -> None
     kafka_config = {
         'bootstrap.servers': kafkaHost,
         'group.id': '1',
         'auto.offset.reset': 'earliest'
     }
-
+    
+    logger=clog("default_log",os.path.join(logger_path,"default_log.log")).setup_logger()
+    
     # Create Consumer instance
     class_id=classId
     host="localhost:8080" if apiHost==None else apiHost
-    consumer = Consumer(kafka_config)
-    # Subscribe to topic
-    topic = kafkaTopic
-    consumer.subscribe([topic])
     account=yaml.safe_load(open(account))
     token=http_requests.authenticate(account.get("username",""),account.get("password",""),host).get("token","")
     
@@ -88,7 +99,7 @@ def main(kafkaHost,apiHost,kafkaTopic,account,classId,logger):
     raw_response,class_members=http_requests.getClassMembers_name(class_id=class_id,token=token,host=host)
     
     logger.debug(f"Basic Run Info:\nAccount: {account}\nKafka_config: {kafka_config}\nClass id: {class_id}, Class_Start: {class_start_time}, Class_End: {class_end_time}\nMembers_info: {raw_response}")
-    yolo_model,facenet,svm_model,encoder=prepare_model()
+    # facenet,svm_model,encoder=prepare_model_noyolo()
     
     
     participants_dict=init_participants_dict(class_members)
@@ -105,14 +116,14 @@ def main(kafkaHost,apiHost,kafkaTopic,account,classId,logger):
         "run_time":0
     }
     
-    mqtt_client=blue.blue_init(user_data=ble_user_data)
+    # mqtt_client=blue.blue_init(user_data=ble_user_data)
     # blue.blue_loop_manual(mqttc=mqtt_client)
     # print(f"Ble result: {ble_participants_dict}")
-    p1=Process(target=blue.blue_loop_manual,args=(mqtt_client))
+    p1=Process(target=blue.blue_loop_manual,args=(ble_user_data,))
     p1.start()
     print("Ble Process's running")
     
-    p2=Process(target=facial_process,args=(facial_usual_run,class_duration,class_start_time,class_end_time,consumer,facenet,svm_model,encoder,participants_dict,logger))
+    p2=Process(target=facial_process,args=(facial_usual_run,class_duration,class_start_time,class_end_time,kafka_config,kafkaTopic,participants_dict,logger_path))
     p2.start()
     print("Kafka Process's running")
     
@@ -143,9 +154,7 @@ def main(kafkaHost,apiHost,kafkaTopic,account,classId,logger):
             logger.debug(f"Successfully updated attendance status for {key}") if status else logger.warning(f"updated attendance status for {key} failed !")
             
     
-    logger.debug("It's a usual Run. Commitments have been made !") if facial_usual_run["value"] else logger.warning("It's a UNUSUAL Run. No Commitment have been made !")
-    consumer.close()
-        
+    logger.debug("It's a usual Run. Commitments have been made !") if facial_usual_run["value"] else logger.warning("It's a UNUSUAL Run. No Commitment have been made !")        
 
 if __name__ == "__main__":
     argparse=argparse.ArgumentParser("Options to run script.")
@@ -155,8 +164,10 @@ if __name__ == "__main__":
     argparse.add_argument("--account",help=f"(OPTIONAL) The yaml file of the managemant account to run this script. The default account will be located at {default_account_path}.",type=str,default=default_account_path)
     argparse.add_argument("--api_host",help=f"(OPTIONAL) The host address of api server to make http request. The default host will be 'localhost:8080'",type=str,default="localhost:8080")
     argparse.add_argument("--class_id",help=f"The class id to run this script on.",default=1)
-    default_logging_path=get_cusom_Path_from_here(os.path.join("logs","default_log.log"))
-    argparse.add_argument("--log",help=f"(OPTIONAL) Set the logging file directory. The default directory is {default_logging_path}",default=default_logging_path)
-    log=clog("default_log",default_logging_path).setup_logger()
+    default_logging_path=get_cusom_Path_from_here("logs")
+    argparse.add_argument("--log",help=f"(OPTIONAL) Set the logging folder directory. The default directory is {default_logging_path}",default=default_logging_path)        
+    log=default_logging_path
     args=argparse.parse_args()
-    main(kafkaHost=args.kafka_host,apiHost=args.api_host,kafkaTopic=args.kafka_topic,account=args.account,classId=args.class_id,logger=log)
+    if args.log!=None:
+        log=args.log
+    main(kafkaHost=args.kafka_host,apiHost=args.api_host,kafkaTopic=args.kafka_topic,account=args.account,classId=args.class_id,logger_path=log)

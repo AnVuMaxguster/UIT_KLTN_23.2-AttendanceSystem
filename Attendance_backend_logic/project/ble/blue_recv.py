@@ -100,9 +100,10 @@ def blue_init(user_data):
     
     return mqttc
 
-def blue_loop_manual(mqttc):
-    #type: (mqtt.Client)->None
+def blue_loop_manual(user_data):
+    #type: (dict)->None
     try:
+        mqttc=blue_init(user_data=user_data)
         while True:
             mqttc.loop()
             if not mqttc.is_connected():
