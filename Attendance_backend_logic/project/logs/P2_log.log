@@ -1,0 +1,59 @@
+2024-06-25 01:35:16,169 DEBUG Basic Run Info:
+Account: {'username': 'admin1', 'password': 'vippropassword'}
+Kafka_config: {'bootstrap.servers': '192.168.120.46:9092', 'group.id': '1', 'auto.offset.reset': 'earliest'}
+Class id: 5, Class_Start: 2024-06-25 01:21:00+07:00, Class_End: 2024-06-25 02:00:00+07:00
+Members_info: {'20521555': {'id': 7, 'bleMac': ''}, '20521104': {'id': 6, 'bleMac': ''}, '20521056': {'id': 3, 'bleMac': ''}, '20521240': {'id': 9, 'bleMac': ''}}
+2024-06-25 01:58:08,816 DEBUG Receving from Mqtt: {'device_addr': [], 'timestamp': 1719253713}
+2024-06-25 02:02:09,991 DEBUG Receving from Mqtt: {'device_addr': [], 'timestamp': 1719255309}
+2024-06-25 02:02:09,991 DEBUG Receving from Mqtt: {'device_addr': [], 'timestamp': 1719255309}
+2024-06-25 02:04:03,626 DEBUG Receving from Mqtt: {'device_addr': [], 'timestamp': 1719255669}
+2024-06-25 02:04:03,626 DEBUG Receving from Mqtt: {'device_addr': [], 'timestamp': 1719255669}
+2024-06-25 02:04:03,626 DEBUG Receving from Mqtt: {'device_addr': [], 'timestamp': 1719255669}
+2024-06-25 02:13:04,623 DEBUG Receving from Mqtt: {'device_addr': [], 'timestamp': 1719255669}
+2024-06-25 02:15:59,070 DEBUG Receving from Mqtt: {'device_addr': [], 'timestamp': 1719255669}
+2024-06-25 02:17:06,375 DEBUG Receving from Mqtt: {'device_addr': [], 'timestamp': 1719255669}
+2024-06-25 02:18:21,131 DEBUG Receving from Mqtt: {'device_addr': [], 'timestamp': 1719255669}
+2024-06-25 02:20:46,445 DEBUG Receving from Mqtt: {'device_addr': [], 'timestamp': 1719255669}
+2024-06-25 02:41:49,396 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719253713}
+2024-06-25 02:42:03,222 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719255309}
+2024-06-25 02:42:03,222 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719255309}
+2024-06-25 02:42:14,340 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719255669}
+2024-06-25 02:42:14,340 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719255669}
+2024-06-25 02:42:14,340 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719255669}
+2024-06-25 02:44:06,965 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719253713}
+2024-06-25 02:44:26,777 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719255309}
+2024-06-25 02:44:26,777 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719255309}
+2024-06-25 02:45:09,721 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719255669}
+2024-06-25 02:45:09,721 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719255669}
+2024-06-25 02:45:09,721 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719255669}
+2024-06-25 03:27:57,800 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719260825}
+2024-06-25 03:28:24,793 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719262509}
+2024-06-25 03:28:24,793 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719262509}
+2024-06-25 03:28:37,961 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719263109}
+2024-06-25 03:28:37,961 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719263109}
+2024-06-25 03:28:37,961 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719263109}
+2024-06-25 03:32:37,850 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719260825}
+2024-06-25 03:41:16,157 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719260825}
+2024-06-25 03:41:25,173 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719262509}
+2024-06-25 03:41:25,173 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719262509}
+2024-06-25 03:41:31,165 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719263109}
+2024-06-25 03:41:31,165 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719263109}
+2024-06-25 03:41:31,165 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719263109}
+2024-06-25 03:43:49,842 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719260825}
+2024-06-25 03:43:55,906 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719262509}
+2024-06-25 03:43:55,906 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719262509}
+2024-06-25 03:44:02,114 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719263109}
+2024-06-25 03:44:02,114 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719263109}
+2024-06-25 03:44:02,114 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719263109}
+2024-06-25 03:54:10,562 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719260825}
+2024-06-25 03:54:16,400 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719262509}
+2024-06-25 03:54:16,400 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719262509}
+2024-06-25 03:54:38,501 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719263109}
+2024-06-25 03:54:38,501 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719263109}
+2024-06-25 03:54:38,501 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719263109}
+2024-06-25 04:01:12,410 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719262509}
+2024-06-25 04:01:21,348 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719262509}
+2024-06-25 04:01:21,348 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719262509}
+2024-06-25 04:12:56,081 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719262509}
+2024-06-25 04:13:15,031 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719262509}
+2024-06-25 04:14:39,176 DEBUG Receving from Mqtt: {'device_addr': ['hehe'], 'timestamp': 1719263109}

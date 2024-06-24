@@ -19,3 +19,116 @@ Kafka_config: {'bootstrap.servers': '192.168.120.46:9092', 'group.id': '1', 'aut
 Class id: 5, Class_Start: 2024-06-21 18:00:00+07:00, Class_End: 2024-06-21 18:02:00+07:00
 Members_info: {'20521104': {'id': 6, 'bleMac': ''}, '20521555': {'id': 7, 'bleMac': ''}, '20521056': {'id': 3, 'bleMac': ''}, '20521240': {'id': 9, 'bleMac': ''}}
 2024-06-21 18:07:03,827 WARNING It's a UNUSUAL Run. No Commitment have been made !
+2024-06-25 01:26:48,199 DEBUG Basic Run Info:
+Account: {'username': 'admin1', 'password': 'vippropassword'}
+Kafka_config: {'bootstrap.servers': '192.168.120.46:9092', 'group.id': '1', 'auto.offset.reset': 'earliest'}
+Class id: 5, Class_Start: 2024-06-25 01:21:00+07:00, Class_End: 2024-06-25 02:00:00+07:00
+Members_info: {'20521104': {'id': 6, 'bleMac': ''}, '20521555': {'id': 7, 'bleMac': ''}, '20521056': {'id': 3, 'bleMac': ''}, '20521240': {'id': 9, 'bleMac': ''}}
+2024-06-25 01:28:57,723 WARNING It's a UNUSUAL Run. No Commitment have been made !
+2024-06-25 01:29:54,853 DEBUG Basic Run Info:
+Account: {'username': 'admin1', 'password': 'vippropassword'}
+Kafka_config: {'bootstrap.servers': '192.168.120.46:9092', 'group.id': '1', 'auto.offset.reset': 'earliest'}
+Class id: 5, Class_Start: 2024-06-25 01:21:00+07:00, Class_End: 2024-06-25 02:00:00+07:00
+Members_info: {'20521104': {'id': 6, 'bleMac': ''}, '20521555': {'id': 7, 'bleMac': ''}, '20521056': {'id': 3, 'bleMac': ''}, '20521240': {'id': 9, 'bleMac': ''}}
+2024-06-25 01:35:16,169 DEBUG Basic Run Info:
+Account: {'username': 'admin1', 'password': 'vippropassword'}
+Kafka_config: {'bootstrap.servers': '192.168.120.46:9092', 'group.id': '1', 'auto.offset.reset': 'earliest'}
+Class id: 5, Class_Start: 2024-06-25 01:21:00+07:00, Class_End: 2024-06-25 02:00:00+07:00
+Members_info: {'20521555': {'id': 7, 'bleMac': ''}, '20521104': {'id': 6, 'bleMac': ''}, '20521056': {'id': 3, 'bleMac': ''}, '20521240': {'id': 9, 'bleMac': ''}}
+2024-06-25 01:43:48,300 DEBUG Basic Run Info:
+Account: {'username': 'admin1', 'password': 'vippropassword'}
+Kafka_config: {'bootstrap.servers': '192.168.120.46:9092', 'group.id': '1', 'auto.offset.reset': 'earliest'}
+Class id: 5, Class_Start: 2024-06-25 01:21:00+07:00, Class_End: 2024-06-25 02:00:00+07:00
+Members_info: {'20521555': {'id': 7, 'bleMac': ''}, '20521104': {'id': 6, 'bleMac': ''}, '20521056': {'id': 3, 'bleMac': ''}, '20521240': {'id': 9, 'bleMac': ''}}
+2024-06-25 01:56:47,792 DEBUG Basic Run Info:
+Account: {'username': 'admin1', 'password': 'vippropassword'}
+Kafka_config: {'bootstrap.servers': '192.168.120.46:9092', 'group.id': '1', 'auto.offset.reset': 'earliest'}
+Class id: 5, Class_Start: 2024-06-25 01:21:00+07:00, Class_End: 2024-06-25 02:00:00+07:00
+Members_info: {'20521104': {'id': 6, 'bleMac': ''}, '20521555': {'id': 7, 'bleMac': ''}, '20521056': {'id': 3, 'bleMac': ''}, '20521240': {'id': 9, 'bleMac': ''}}
+2024-06-25 02:04:07,296 WARNING It's a UNUSUAL Run. No Commitment have been made !
+2024-06-25 02:12:49,865 DEBUG Basic Run Info:
+Account: {'username': 'admin1', 'password': 'vippropassword'}
+Kafka_config: {'bootstrap.servers': '192.168.120.46:9092', 'group.id': '1', 'auto.offset.reset': 'earliest'}
+Class id: 5, Class_Start: 2024-06-25 01:21:00+07:00, Class_End: 2024-06-25 02:00:00+07:00
+Members_info: {'20521104': {'id': 6, 'bleMac': ''}, '20521555': {'id': 7, 'bleMac': ''}, '20521056': {'id': 3, 'bleMac': ''}, '20521240': {'id': 9, 'bleMac': ''}}
+2024-06-25 02:13:05,768 WARNING It's a UNUSUAL Run. No Commitment have been made !
+2024-06-25 02:15:35,472 DEBUG Basic Run Info:
+Account: {'username': 'admin1', 'password': 'vippropassword'}
+Kafka_config: {'bootstrap.servers': '192.168.120.46:9092', 'group.id': '1', 'auto.offset.reset': 'earliest'}
+Class id: 5, Class_Start: 2024-06-25 01:21:00+07:00, Class_End: 2024-06-25 02:00:00+07:00
+Members_info: {'20521104': {'id': 6, 'bleMac': ''}, '20521555': {'id': 7, 'bleMac': ''}, '20521056': {'id': 3, 'bleMac': ''}, '20521240': {'id': 9, 'bleMac': ''}}
+2024-06-25 02:15:59,904 WARNING It's a UNUSUAL Run. No Commitment have been made !
+2024-06-25 02:16:34,828 DEBUG Basic Run Info:
+Account: {'username': 'admin1', 'password': 'vippropassword'}
+Kafka_config: {'bootstrap.servers': '192.168.120.46:9092', 'group.id': '1', 'auto.offset.reset': 'earliest'}
+Class id: 5, Class_Start: 2024-06-25 01:21:00+07:00, Class_End: 2024-06-25 02:00:00+07:00
+Members_info: {'20521104': {'id': 6, 'bleMac': ''}, '20521555': {'id': 7, 'bleMac': ''}, '20521056': {'id': 3, 'bleMac': ''}, '20521240': {'id': 9, 'bleMac': ''}}
+2024-06-25 02:17:07,245 WARNING It's a UNUSUAL Run. No Commitment have been made !
+2024-06-25 02:17:29,923 DEBUG Basic Run Info:
+Account: {'username': 'admin1', 'password': 'vippropassword'}
+Kafka_config: {'bootstrap.servers': '192.168.120.46:9092', 'group.id': '1', 'auto.offset.reset': 'earliest'}
+Class id: 5, Class_Start: 2024-06-25 01:21:00+07:00, Class_End: 2024-06-25 02:00:00+07:00
+Members_info: {'20521104': {'id': 6, 'bleMac': ''}, '20521555': {'id': 7, 'bleMac': ''}, '20521056': {'id': 3, 'bleMac': ''}, '20521240': {'id': 9, 'bleMac': ''}}
+2024-06-25 02:18:22,008 WARNING It's a UNUSUAL Run. No Commitment have been made !
+2024-06-25 02:20:24,610 DEBUG Basic Run Info:
+Account: {'username': 'admin1', 'password': 'vippropassword'}
+Kafka_config: {'bootstrap.servers': '192.168.120.46:9092', 'group.id': '1', 'auto.offset.reset': 'earliest'}
+Class id: 5, Class_Start: 2024-06-25 01:21:00+07:00, Class_End: 2024-06-25 02:00:00+07:00
+Members_info: {'20521555': {'id': 7, 'bleMac': ''}, '20521104': {'id': 6, 'bleMac': ''}, '20521056': {'id': 3, 'bleMac': ''}, '20521240': {'id': 9, 'bleMac': ''}}
+2024-06-25 02:20:47,521 WARNING It's a UNUSUAL Run. No Commitment have been made !
+2024-06-25 02:40:36,635 DEBUG Basic Run Info:
+Account: {'username': 'admin1', 'password': 'vippropassword'}
+Kafka_config: {'bootstrap.servers': '192.168.120.46:9092', 'group.id': '1', 'auto.offset.reset': 'earliest'}
+Class id: 5, Class_Start: 2024-06-25 01:21:00+07:00, Class_End: 2024-06-25 02:00:00+07:00
+Members_info: {'20521555': {'id': 7, 'bleMac': ''}, '20521104': {'id': 6, 'bleMac': ''}, 'test': {'id': 11, 'bleMac': ''}, '20521056': {'id': 3, 'bleMac': ''}, '20521240': {'id': 9, 'bleMac': ''}}
+2024-06-25 02:43:20,252 DEBUG Basic Run Info:
+Account: {'username': 'admin1', 'password': 'vippropassword'}
+Kafka_config: {'bootstrap.servers': '192.168.120.46:9092', 'group.id': '1', 'auto.offset.reset': 'earliest'}
+Class id: 5, Class_Start: 2024-06-25 01:21:00+07:00, Class_End: 2024-06-25 02:00:00+07:00
+Members_info: {'20521555': {'id': 7, 'bleMac': ''}, '20521104': {'id': 6, 'bleMac': ''}, 'test': {'id': 11, 'bleMac': ''}, '20521056': {'id': 3, 'bleMac': ''}, '20521240': {'id': 9, 'bleMac': ''}}
+2024-06-25 02:45:10,698 WARNING It's a UNUSUAL Run. No Commitment have been made !
+2024-06-25 03:26:15,635 DEBUG Basic Run Info:
+Account: {'username': 'admin1', 'password': 'vippropassword'}
+Kafka_config: {'bootstrap.servers': '192.168.120.46:9092', 'group.id': '1', 'auto.offset.reset': 'earliest'}
+Class id: 1, Class_Start: 2024-06-25 03:21:54+07:00, Class_End: 2024-06-25 04:00:00+07:00
+Members_info: {'test': {'id': 6, 'bleMac': 'hehe'}}
+2024-06-25 03:28:41,181 WARNING It's a UNUSUAL Run. No Commitment have been made !
+2024-06-25 03:32:14,897 DEBUG Basic Run Info:
+Account: {'username': 'admin1', 'password': 'vippropassword'}
+Kafka_config: {'bootstrap.servers': '192.168.120.46:9092', 'group.id': '1', 'auto.offset.reset': 'earliest'}
+Class id: 1, Class_Start: 2024-06-25 03:21:54+07:00, Class_End: 2024-06-25 04:00:00+07:00
+Members_info: {'test': {'id': 6, 'bleMac': 'hehe'}}
+2024-06-25 03:41:01,368 DEBUG Basic Run Info:
+Account: {'username': 'admin1', 'password': 'vippropassword'}
+Kafka_config: {'bootstrap.servers': '192.168.120.46:9092', 'group.id': '1', 'auto.offset.reset': 'earliest'}
+Class id: 1, Class_Start: 2024-06-25 03:21:54+07:00, Class_End: 2024-06-25 04:00:00+07:00
+Members_info: {'test': {'id': 6, 'bleMac': 'hehe'}}
+2024-06-25 03:41:31,970 WARNING It's a UNUSUAL Run. No Commitment have been made !
+2024-06-25 03:43:33,931 DEBUG Basic Run Info:
+Account: {'username': 'admin1', 'password': 'vippropassword'}
+Kafka_config: {'bootstrap.servers': '192.168.120.46:9092', 'group.id': '1', 'auto.offset.reset': 'earliest'}
+Class id: 1, Class_Start: 2024-06-25 03:21:54+07:00, Class_End: 2024-06-25 04:00:00+07:00
+Members_info: {'test': {'id': 6, 'bleMac': 'hehe'}}
+2024-06-25 03:44:02,988 WARNING It's a UNUSUAL Run. No Commitment have been made !
+2024-06-25 03:53:47,546 DEBUG Basic Run Info:
+Account: {'username': 'admin1', 'password': 'vippropassword'}
+Kafka_config: {'bootstrap.servers': '192.168.120.46:9092', 'group.id': '1', 'auto.offset.reset': 'earliest'}
+Class id: 1, Class_Start: 2024-06-25 03:21:54+07:00, Class_End: 2024-06-25 04:00:00+07:00
+Members_info: {'test': {'id': 6, 'bleMac': 'hehe'}}
+2024-06-25 03:54:39,209 WARNING It's a UNUSUAL Run. No Commitment have been made !
+2024-06-25 04:00:36,709 DEBUG Basic Run Info:
+Account: {'username': 'admin1', 'password': 'vippropassword'}
+Kafka_config: {'bootstrap.servers': '192.168.120.46:9092', 'group.id': '1', 'auto.offset.reset': 'earliest'}
+Class id: 1, Class_Start: 2024-06-25 03:21:54+07:00, Class_End: 2024-06-25 04:00:00+07:00
+Members_info: {'test': {'id': 6, 'bleMac': 'hehe'}}
+2024-06-25 04:09:38,881 DEBUG Basic Run Info:
+Account: {'username': 'admin1', 'password': 'vippropassword'}
+Kafka_config: {'bootstrap.servers': '192.168.120.46:9092', 'group.id': '1', 'auto.offset.reset': 'earliest'}
+Class id: 1, Class_Start: 2024-06-25 03:21:54+07:00, Class_End: 2024-06-25 04:00:00+07:00
+Members_info: {'test': {'id': 6, 'bleMac': 'hehe'}}
+2024-06-25 04:12:40,641 DEBUG Basic Run Info:
+Account: {'username': 'admin1', 'password': 'vippropassword'}
+Kafka_config: {'bootstrap.servers': '192.168.120.46:9092', 'group.id': '1', 'auto.offset.reset': 'earliest'}
+Class id: 1, Class_Start: 2024-06-25 03:21:54+07:00, Class_End: 2024-06-25 04:00:00+07:00
+Members_info: {'test': {'id': 6, 'bleMac': 'hehe'}}
+2024-06-25 04:14:39,939 WARNING It's a UNUSUAL Run. No Commitment have been made !

@@ -152,10 +152,10 @@ class mobile_account_screen extends ConsumerWidget {
     );
   }
 }
+final ble_address_controller=TextEditingController();
 
 class update_ble_dialog extends ConsumerWidget{
 
-  final ble_address_controller=TextEditingController();
   final Member member;
 
 
@@ -187,6 +187,7 @@ class update_ble_dialog extends ConsumerWidget{
                 padding: const EdgeInsets.symmetric(vertical: 15),
                 child: TextField(
                   autofocus: true,
+                  controller: ble_address_controller,
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
@@ -249,7 +250,8 @@ class update_ble_dialog extends ConsumerWidget{
                                   ),
                                   child: TextButton(
                                     onPressed: () async {
-                                      final result=await ref.read(account_Controller as ChangeNotifierProvider<Account_ChangeNotifier>).putSelfBleMac(ref,member, ble_address_controller.text);
+                                      final ble_put=ble_address_controller.text;
+                                      final result=await ref.read(account_Controller as ChangeNotifierProvider<Account_ChangeNotifier>).putSelfBleMac(ref,member,ble_put);
                                       if(result==true)
                                         {
                                           ref.read(account_Controller as ChangeNotifierProvider<Account_ChangeNotifier>).update_ble_error="";

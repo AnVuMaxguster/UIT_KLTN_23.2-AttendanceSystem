@@ -1,6 +1,8 @@
 import paho.mqtt.client as mqtt
 import json
 from logging import Logger
+from clog import clog
+import os
 from datetime import datetime
 import project.utilities as utilities
 def raw_name_dict_to_ble_dict(raw):
@@ -22,6 +24,8 @@ def extract_userdata(userdata):
     class_duration=userdata["class_duration"]
     class_start_time=userdata["class_start_time"]
     class_end_time=userdata["class_end_time"]
+    # logger_path=userdata["logger_path"]
+    # logger=clog("P2_log",os.path.join(logger_path,"P2_log.log")).setup_logger()
     logger=userdata["logger"]
     usual_run=userdata["usual_run"]
     run_time=userdata["run_time"]
@@ -34,7 +38,6 @@ def check_ble(mqtt_data,class_data):
     for key,value in class_data.items():
         if key in mqtt_data:
             result.append(value)
-    
     return result
         
 
@@ -46,6 +49,7 @@ def on_message(client, userdata, message):
         # --------- DO YOUR JOB HERE ----------------
         class_member_ble_dict,participants_dict,class_duration,class_start_time,class_end_time,usual_run,run_time,logger=extract_userdata(userdata=userdata)
         logger.debug(f"Receving from Mqtt: {json_data}")
+        print(f"\n\nUserdata: {userdata}")
         timestamp = float(json_data["timestamp"])
         data = json_data["device_addr"]
         if timestamp<class_start_time.timestamp():
@@ -62,8 +66,10 @@ def on_message(client, userdata, message):
         if run_time>=class_duration:
             # print(f"usual run {usual_run}")
             if usual_run:
-                print("final_checkout")
+                print("BLE final_checkout")
                 utilities.final_attendance_results(participants_dict=participants_dict,duration=class_duration)
+                print(f"BLE_participants_dict_after_final: {participants_dict}")
+                userdata["participants_dict"]=participants_dict
             client.loop_stop()
             client.disconnect()
             return
@@ -103,13 +109,17 @@ def blue_init(user_data):
 def blue_loop_manual(user_data):
     #type: (dict)->None
     try:
+        logger_path=user_data["logger_path"]
+        logger=clog("P2_log",os.path.join(logger_path,"P2_log.log")).setup_logger()
+        user_data["logger"]=logger
         mqttc=blue_init(user_data=user_data)
         while True:
             mqttc.loop()
             if not mqttc.is_connected():
                 break
             # print(f"Received the following message: {mqttc.user_data_get()}")
-        
+    except Exception as e :
+        print(f"BLE Exception: {str(e)}")
     except KeyboardInterrupt:
         # Handle keyboard interrupt
         print("Keyboard interrupt received. Disconnecting gracefully.")

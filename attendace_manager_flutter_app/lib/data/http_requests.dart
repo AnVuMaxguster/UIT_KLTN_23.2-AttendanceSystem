@@ -178,6 +178,7 @@ put_self_account(String address, PutRequest putRequest) async
 {
   final uri=Uri.http(address,"/api/member");
   try {
+    String put_request_string=putRequest.toJson();
     var response = await http.put(
         uri,
         headers:
@@ -186,7 +187,7 @@ put_self_account(String address, PutRequest putRequest) async
           'Access-Control-Allow-Origin': '*',
           'Content-Type': 'application/json'
         },
-        body: putRequest.toJson()
+        body: put_request_string
     ).timeout(Duration(seconds: 10));
     if(response.statusCode==200)
       return true;

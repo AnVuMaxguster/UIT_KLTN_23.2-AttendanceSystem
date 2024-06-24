@@ -15,7 +15,7 @@ from project.clog import clog
 from logging import Logger
 from sklearn.preprocessing import LabelEncoder
 from keras_facenet import FaceNet
-from multiprocessing import Process
+from multiprocessing import Process,Manager
 import project.ble.blue_recv as blue
 
 def get_cusom_Path_from_here(filename):
@@ -87,7 +87,6 @@ def main(kafkaHost,apiHost,kafkaTopic,account,classId,logger_path):
     }
     
     logger=clog("default_log",os.path.join(logger_path,"default_log.log")).setup_logger()
-    
     # Create Consumer instance
     class_id=classId
     host="localhost:8080" if apiHost==None else apiHost
@@ -101,31 +100,36 @@ def main(kafkaHost,apiHost,kafkaTopic,account,classId,logger_path):
     logger.debug(f"Basic Run Info:\nAccount: {account}\nKafka_config: {kafka_config}\nClass id: {class_id}, Class_Start: {class_start_time}, Class_End: {class_end_time}\nMembers_info: {raw_response}")
     # facenet,svm_model,encoder=prepare_model_noyolo()
     
+    manager = Manager()
     
-    participants_dict=init_participants_dict(class_members)
+    
+    participants_dict=manager.dict(init_participants_dict(class_members))
     ble_participants_dict=init_participants_dict(class_members)
     facial_usual_run={"value":False}
-    ble_user_data={
+    ble_user_data=manager.dict({
         "raw_name_dict":raw_response,
         "participants_dict":ble_participants_dict,
         "class_duration":class_duration,
         "class_start_time":class_start_time,
         "class_end_time":class_end_time,
-        "logger":logger,
+        "logger_path":logger_path,
         "usual_run":False,
         "run_time":0
-    }
+    })
     
     # mqtt_client=blue.blue_init(user_data=ble_user_data)
     # blue.blue_loop_manual(mqttc=mqtt_client)
     # print(f"Ble result: {ble_participants_dict}")
-    p1=Process(target=blue.blue_loop_manual,args=(ble_user_data,))
+    
+    p1=Process(target=facial_process,args=(facial_usual_run,class_duration,class_start_time,class_end_time,kafka_config,kafkaTopic,participants_dict,logger_path))
     p1.start()
+    print("Kafka Process's running")
+    
+    p2=Process(target=blue.blue_loop_manual,args=(ble_user_data,))
+    p2.start()
     print("Ble Process's running")
     
-    p2=Process(target=facial_process,args=(facial_usual_run,class_duration,class_start_time,class_end_time,kafka_config,kafkaTopic,participants_dict,logger_path))
-    p2.start()
-    print("Kafka Process's running")
+    
     
     # facial_process(
     #     facial_usual_run=facial_usual_run,
@@ -143,16 +147,31 @@ def main(kafkaHost,apiHost,kafkaTopic,account,classId,logger_path):
     p1.join()
     p2.join()
     
+    print("Both_Process_done")
+    print(f"BLE result= {ble_user_data['participants_dict']}")
+    
+    # if facial_usual_run["value"] and ble_user_data["usual_run"]:
+    #     for key,value in participants_dict.items():
+    #         participants_id=raw_response[key]["id"]
+    #         participant_ble_percents=ble_participants_dict[key]["official_time"]
+    #         participant_facial_percents=value["official_time"]
+    #         participant_attendance_percents=(participant_ble_percents+participant_facial_percents)/2
+    #         # print(f"{participants_id}   {class_id}")
+    #         status=http_requests._update_class_attendance(participant_attendance_percents,participant_facial_percents,participant_ble_percents,participants_id,class_id,token,host)
+    #         logger.debug(f"Successfully updated attendance status for {key}") if status else logger.warning(f"updated attendance status for {key} failed !")
+    
     if facial_usual_run["value"] and ble_user_data["usual_run"]:
         for key,value in participants_dict.items():
             participants_id=raw_response[key]["id"]
             participant_ble_percents=ble_participants_dict[key]["official_time"]
             participant_facial_percents=value["official_time"]
             participant_attendance_percents=(participant_ble_percents+participant_facial_percents)/2
+            if participant_facial_percents <0.1 or participant_ble_percents <0.1: 
+                participant_attendance_percents=0
             # print(f"{participants_id}   {class_id}")
             status=http_requests._update_class_attendance(participant_attendance_percents,participant_facial_percents,participant_ble_percents,participants_id,class_id,token,host)
             logger.debug(f"Successfully updated attendance status for {key}") if status else logger.warning(f"updated attendance status for {key} failed !")
-            
+               
     
     logger.debug("It's a usual Run. Commitments have been made !") if facial_usual_run["value"] else logger.warning("It's a UNUSUAL Run. No Commitment have been made !")        
 
