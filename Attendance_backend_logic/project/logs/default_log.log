@@ -132,3 +132,63 @@ Kafka_config: {'bootstrap.servers': '192.168.120.46:9092', 'group.id': '1', 'aut
 Class id: 1, Class_Start: 2024-06-25 03:21:54+07:00, Class_End: 2024-06-25 04:00:00+07:00
 Members_info: {'test': {'id': 6, 'bleMac': 'hehe'}}
 2024-06-25 04:14:39,939 WARNING It's a UNUSUAL Run. No Commitment have been made !
+2024-06-25 22:17:28,664 DEBUG Basic Run Info:
+Account: {'username': 'admin1', 'password': 'vippropassword'}
+Kafka_config: {'bootstrap.servers': '192.168.120.46:9092', 'group.id': '1', 'auto.offset.reset': 'earliest'}
+Class id: 5, Class_Start: 2024-06-25 20:25:00+07:00, Class_End: 2024-06-25 20:27:00+07:00
+Members_info: {'20521312': {'id': 15, 'bleMac': '80:20:FD:34:A6:71'}, '20521104': {'id': 14, 'bleMac': 'DC:B7:2E:54:B0:1D'}, '20521056': {'id': 13, 'bleMac': '30:50:CE:14:5F:95'}}
+2024-06-26 02:26:40,142 DEBUG Basic Run Info:
+Account: {'username': 'admin1', 'password': 'vippropassword'}
+Kafka_config: {'bootstrap.servers': '192.168.120.46:9092', 'group.id': '1', 'auto.offset.reset': 'earliest'}
+Class id: 5, Class_Start: 2024-06-26 02:28:00+07:00, Class_End: 2024-06-26 02:30:00+07:00
+Members_info: {'20521312': {'id': 15, 'bleMac': '80:20:FD:34:A6:71'}, '20521104': {'id': 14, 'bleMac': 'DC:B7:2E:54:B0:1D'}, '20521056': {'id': 13, 'bleMac': '30:50:CE:14:5F:95'}}
+2024-06-26 02:31:50,141 DEBUG Successfully updated attendance status for 20521312
+2024-06-26 02:31:50,699 DEBUG Successfully updated attendance status for 20521104
+2024-06-26 02:31:51,243 DEBUG Successfully updated attendance status for 20521056
+2024-06-26 02:31:51,243 DEBUG It's a usual Run. Commitments have been made !
+2024-06-26 02:44:33,100 DEBUG Basic Run Info:
+Account: {'username': 'admin1', 'password': 'vippropassword'}
+Kafka_config: {'bootstrap.servers': '192.168.120.46:9092', 'group.id': '1', 'auto.offset.reset': 'earliest'}
+Class id: 5, Class_Start: 2024-06-26 02:45:00+07:00, Class_End: 2024-06-26 02:47:00+07:00
+Members_info: {'20521312': {'id': 15, 'bleMac': '80:20:FD:34:A6:71'}, '20521104': {'id': 14, 'bleMac': 'DC:B7:2E:54:B0:1D'}, '20521056': {'id': 13, 'bleMac': '30:50:CE:14:5F:95'}}
+2024-06-26 02:48:50,182 DEBUG Both_Process_done
+2024-06-26 02:48:50,184 DEBUG BLE result= {'20521312': {'official_time': 1, 'missing_fames': 0, 'reserve_time': 0}, '20521104': {'official_time': 1, 'missing_fames': 0, 'reserve_time': 0}, '20521056': {'official_time': 1, 'missing_fames': 0, 'reserve_time': 0}}
+2024-06-26 02:48:50,184 DEBUG Facial result= {'20521312': {'official_time': 0.6449429909388223, 'missing_fames': 59, 'reserve_time': 0.16202378273010254}, '20521104': {'official_time': 1.7434354066848754, 'missing_fames': 14, 'reserve_time': 0.038272988796234086}, '20521056': {'official_time': 0.4132829705874126, 'missing_fames': 0, 'reserve_time': 0}}
+2024-06-26 02:48:50,769 DEBUG Successfully updated attendance status for 20521312
+2024-06-26 02:48:51,306 DEBUG Successfully updated attendance status for 20521104
+2024-06-26 02:48:51,831 DEBUG Successfully updated attendance status for 20521056
+2024-06-26 02:48:51,831 DEBUG It's a usual Run. Commitments have been made !
+2024-06-26 02:54:14,266 DEBUG Basic Run Info:
+Account: {'username': 'admin1', 'password': 'vippropassword'}
+Kafka_config: {'bootstrap.servers': '192.168.120.46:9092', 'group.id': '1', 'auto.offset.reset': 'earliest'}
+Class id: 5, Class_Start: 2024-06-26 02:55:00+07:00, Class_End: 2024-06-26 02:57:00+07:00
+Members_info: {'20521312': {'id': 15, 'bleMac': '80:20:FD:34:A6:71'}, '20521104': {'id': 14, 'bleMac': 'DC:B7:2E:54:B0:1D'}, '20521056': {'id': 13, 'bleMac': '30:50:CE:14:5F:95'}}
+2024-06-26 02:54:49,709 DEBUG Basic Run Info:
+Account: {'username': 'admin1', 'password': 'vippropassword'}
+Kafka_config: {'bootstrap.servers': '192.168.120.46:9092', 'group.id': '1', 'auto.offset.reset': 'earliest'}
+Class id: 5, Class_Start: 2024-06-26 02:55:00+07:00, Class_End: 2024-06-26 02:57:00+07:00
+Members_info: {'20521312': {'id': 15, 'bleMac': '80:20:FD:34:A6:71'}, '20521104': {'id': 14, 'bleMac': 'DC:B7:2E:54:B0:1D'}, '20521056': {'id': 13, 'bleMac': '30:50:CE:14:5F:95'}}
+2024-06-26 02:59:11,220 DEBUG Both_Process_done
+2024-06-26 02:59:11,221 DEBUG BLE result= {'20521312': {'official_time': 1, 'missing_fames': 0, 'reserve_time': 0}, '20521104': {'official_time': 1, 'missing_fames': 0, 'reserve_time': 0}, '20521056': {'official_time': 1, 'missing_fames': 0, 'reserve_time': 0}}
+2024-06-26 02:59:11,221 DEBUG Facial result= {'20521312': {'official_time': 0.3101524631182353, 'missing_fames': 62, 'reserve_time': 0.1713228185971578}, '20521104': {'official_time': 0.8635072886943818, 'missing_fames': 17, 'reserve_time': 0.04778212706247986}, '20521056': {'official_time': 0.21183449029922496, 'missing_fames': 0, 'reserve_time': 0}}
+2024-06-26 02:59:11,858 DEBUG Successfully updated attendance status for 20521312
+2024-06-26 02:59:12,410 DEBUG Successfully updated attendance status for 20521104
+2024-06-26 02:59:12,957 DEBUG Successfully updated attendance status for 20521056
+2024-06-26 02:59:12,957 DEBUG It's a usual Run. Commitments have been made !
+2024-06-26 03:25:52,749 DEBUG Basic Run Info:
+Account: {'username': 'admin1', 'password': 'vippropassword'}
+Kafka_config: {'bootstrap.servers': '192.168.120.46:9092', 'group.id': '1', 'auto.offset.reset': 'earliest'}
+Class id: 5, Class_Start: 2024-06-26 03:25:00+07:00, Class_End: 2024-06-26 03:27:00+07:00
+Members_info: {'20521312': {'id': 15, 'bleMac': '80:20:FD:34:A6:71'}, '20521104': {'id': 14, 'bleMac': 'DC:B7:2E:54:B0:1D'}, '20521056': {'id': 13, 'bleMac': '30:50:CE:14:5F:95'}}
+2024-06-26 03:37:02,196 DEBUG Basic Run Info:
+Account: {'username': 'admin1', 'password': 'vippropassword'}
+Kafka_config: {'bootstrap.servers': '192.168.120.46:9092', 'group.id': '1', 'auto.offset.reset': 'earliest'}
+Class id: 5, Class_Start: 2024-06-26 03:38:00+07:00, Class_End: 2024-06-26 03:43:00+07:00
+Members_info: {'20521312': {'id': 15, 'bleMac': '80:20:FD:34:A6:71'}, '20521104': {'id': 14, 'bleMac': 'DC:B7:2E:54:B0:1D'}, '20521056': {'id': 13, 'bleMac': '30:50:CE:14:5F:95'}}
+2024-06-26 03:48:44,384 DEBUG Both_Process_done
+2024-06-26 03:48:44,385 DEBUG BLE result= {'20521312': {'official_time': 0.6033333333333333, 'missing_fames': 1, 'reserve_time': 2.0}, '20521104': {'official_time': 1, 'missing_fames': 0, 'reserve_time': 0}, '20521056': {'official_time': 1, 'missing_fames': 0, 'reserve_time': 0}}
+2024-06-26 03:48:44,386 DEBUG Facial result= {'20521312': {'official_time': 0.700585920015971, 'missing_fames': 1, 'reserve_time': 0.002797945340474506}, '20521104': {'official_time': 0.6724657527605692, 'missing_fames': 203, 'reserve_time': 0.5664375940958664}, '20521056': {'official_time': 0.6524675194422405, 'missing_fames': 0, 'reserve_time': 0}}
+2024-06-26 03:48:45,112 DEBUG Successfully updated attendance status for 20521312
+2024-06-26 03:48:45,715 DEBUG Successfully updated attendance status for 20521104
+2024-06-26 03:48:46,235 DEBUG Successfully updated attendance status for 20521056
+2024-06-26 03:48:46,235 DEBUG It's a usual Run. Commitments have been made !

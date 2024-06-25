@@ -74,7 +74,6 @@ def putMember_Class(property,value,member_id,class_id,token,host):
         print(f"Failed to get Members name. Status code: {response.status_code}, Response: {response.text}")
         return False
 def _update_class_attendance(final_percents,facial_percents,ble_percents,member_id,class_id,token,host):
-    #type: (float,int,int,str,str) -> bool  
     isPresent=False
     if final_percents >=0.5: isPresent=True
     status1=putMember_Class("setPresent",isPresent,member_id,class_id,token,host)

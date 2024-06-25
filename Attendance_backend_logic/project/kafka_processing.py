@@ -32,8 +32,9 @@ def facial_process(facial_usual_run,class_duration,class_start_time,class_end_ti
     runtime=0
     while runtime<class_duration:
         msg = consumer.poll(timeout=1.0)
-        logger.debug(f"testing")
+        # logger.debug(f"testing")
         if msg is None:
+            print(".",end="")
             continue
         if msg.error():
             if msg.error().code() == KafkaError._PARTITION_EOF:
@@ -45,7 +46,7 @@ def facial_process(facial_usual_run,class_duration,class_start_time,class_end_ti
                 break
         # Decode the base64-encoded image data
         raw= json.loads(msg.value())
-        logger.debug(f"Receving from kafka: {raw}")
+        # logger.debug(f"Receving from kafka: {raw}")
         images_encoded_array=raw.get("data",[])
         timestamp=raw.get("timestamp",0)
         if timestamp<class_start_time.timestamp():
@@ -60,15 +61,18 @@ def facial_process(facial_usual_run,class_duration,class_start_time,class_end_ti
             decoded_image = np.array(raw_image)
             images_decoded_array.append(decoded_image)
         results=regconition_model(images_decoded_array,facenet,svm_model,encoder)
+        logger.debug(f"Recognition result: {results}")
         time_elapsed=run_time_minutes_from(timestamp,class_start_time.timestamp())-runtime
         runtime=run_time_minutes_from(timestamp,class_start_time.timestamp())
         commit_attendance_results(results,participants_dict,time_elapsed)
     
     if usual_run:
+        logger.debug(f"Before final commit (official_time is in Mininutes): {participants_dict}")
         final_attendance_results(participants_dict,class_duration)
+        logger.debug(f"After final commit (official_time is in Percents): {participants_dict}, while class duration is (in Minutes): {class_duration}")
+        
     facial_usual_run["value"]=usual_run
     consumer.close()
-
 
 def Init_Kafka_Consumer(kafka_config,topic):
     #type: (dict,str)->any
@@ -105,7 +109,7 @@ def main(kafkaHost,apiHost,kafkaTopic,account,classId,logger_path):
     
     participants_dict=manager.dict(init_participants_dict(class_members))
     ble_participants_dict=init_participants_dict(class_members)
-    facial_usual_run={"value":False}
+    facial_usual_run=manager.dict({"value":False})
     ble_user_data=manager.dict({
         "raw_name_dict":raw_response,
         "participants_dict":ble_participants_dict,
@@ -147,8 +151,9 @@ def main(kafkaHost,apiHost,kafkaTopic,account,classId,logger_path):
     p1.join()
     p2.join()
     
-    print("Both_Process_done")
-    print(f"BLE result= {ble_user_data['participants_dict']}")
+    logger.debug("Both_Process_done")
+    logger.debug(f"BLE result= {ble_user_data['participants_dict']}")
+    logger.debug(f"Facial result= {participants_dict}")
     
     # if facial_usual_run["value"] and ble_user_data["usual_run"]:
     #     for key,value in participants_dict.items():
@@ -163,11 +168,11 @@ def main(kafkaHost,apiHost,kafkaTopic,account,classId,logger_path):
     if facial_usual_run["value"] and ble_user_data["usual_run"]:
         for key,value in participants_dict.items():
             participants_id=raw_response[key]["id"]
-            participant_ble_percents=ble_participants_dict[key]["official_time"]
+            participant_ble_percents=ble_user_data['participants_dict'][key]["official_time"]
             participant_facial_percents=value["official_time"]
             participant_attendance_percents=(participant_ble_percents+participant_facial_percents)/2
             if participant_facial_percents <0.1 or participant_ble_percents <0.1: 
-                participant_attendance_percents=0
+                participant_attendance_percents=0.1111
             # print(f"{participants_id}   {class_id}")
             status=http_requests._update_class_attendance(participant_attendance_percents,participant_facial_percents,participant_ble_percents,participants_id,class_id,token,host)
             logger.debug(f"Successfully updated attendance status for {key}") if status else logger.warning(f"updated attendance status for {key} failed !")

@@ -26,9 +26,15 @@ def prepare_model():
     #type: ()->tuple[any,FaceNet,any,LabelEncoder]
     temp = pathlib.PosixPath
     pathlib.PosixPath = pathlib.WindowsPath
-    yolov5RelPath=os.path.join("static","best_yolov5.pt")
+    yolov5RelPath=os.path.join("static","yolov5_new.pt")
     yolomodel = torch.hub.load('ultralytics/yolov5', 'custom',path=get_cusom_Path_from_here(yolov5RelPath), force_reload=True)
-    yolomodel.to("cpu")
+    
+    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    print(f"Device: {device}")
+    yolomodel.to(device)
+    # yolomodel.conf=0.6
+    
+    # yolomodel.to("cpu")
 
     facenet = FaceNet()
     # faces_embeddings = np.load(get_cusom_Path_from_here("faces_embeddings_done_6classes.npz"))

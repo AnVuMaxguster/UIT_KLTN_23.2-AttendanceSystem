@@ -63,21 +63,22 @@ def on_message(client, userdata, message):
         results=check_ble(data,class_member_ble_dict)
         time_elapsed=utilities.run_time_minutes_from(timestamp,class_start_time.timestamp())-run_time
         run_time=utilities.run_time_minutes_from(timestamp,class_start_time.timestamp())   
-        if run_time>=class_duration:
-            # print(f"usual run {usual_run}")
-            if usual_run:
-                print("BLE final_checkout")
-                utilities.final_attendance_results(participants_dict=participants_dict,duration=class_duration)
-                print(f"BLE_participants_dict_after_final: {participants_dict}")
-                userdata["participants_dict"]=participants_dict
-            client.loop_stop()
-            client.disconnect()
-            return
             
         utilities.commit_ble_attendance_results(results=results,participants_dict=participants_dict,atb=time_elapsed)
         userdata["run_time"]=run_time
         userdata["usual_run"]=usual_run
         userdata["participants_dict"]=participants_dict
+        
+        if run_time>=class_duration:
+            # print(f"usual run {usual_run}")
+            if usual_run:
+                logger.debug("BLE final_checkout")
+                utilities.final_attendance_results(participants_dict=participants_dict,duration=class_duration)
+                logger.debug(f"BLE_participants_dict after final_commit: {participants_dict}")
+                userdata["participants_dict"]=participants_dict
+            client.loop_stop()
+            client.disconnect()
+            return
     except Exception as e:
         print(str(e.with_traceback()))
     

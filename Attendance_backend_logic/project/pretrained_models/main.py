@@ -21,7 +21,7 @@ def main(duration:float,output:str,logs:str):
     participants_dict=init_participants_dict(participants_array)
     start_time=time.time()
     runtime=0
-    cap = cv.VideoCapture(0)
+    cap = cv.VideoCapture(r"D:\study_source\KLTN\Kafka\python venv\kafka_venv\project\video3.mp4")
     
     while cap.isOpened() and runtime<duration:
         _, frame = cap.read()

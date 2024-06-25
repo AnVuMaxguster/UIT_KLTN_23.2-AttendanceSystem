@@ -73,14 +73,14 @@ class OneHistoryInfoCard extends ConsumerWidget
                   {
                 case 0:
                   return Colors.red;
-                case <=30:
+                case <=0.3:
                   return Colors.orangeAccent;
-                case <=80:
+                case <=0.5:
                   return Colors.blue;
-                case <100:
+                case <=0.8:
                   return Colors.cyan;
-                case 100:
-              return Colors.greenAccent;
+                case <=100:
+                  return Colors.greenAccent;
               }
             })(),
             boxShadow: [
