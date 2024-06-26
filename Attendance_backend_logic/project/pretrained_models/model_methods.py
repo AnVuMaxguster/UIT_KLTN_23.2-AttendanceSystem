@@ -38,12 +38,12 @@ def prepare_model():
 
     facenet = FaceNet()
     # faces_embeddings = np.load(get_cusom_Path_from_here("faces_embeddings_done_6classes.npz"))
-    faces_embeddings = np.load(get_cusom_Path_from_here("faces_embeddings_done_classes_sample_05062024.npz"))
+    faces_embeddings = np.load(get_cusom_Path_from_here("faces_embeddings_done_classes_sample_26062024.npz"))
     Y = faces_embeddings['arr_1']
     encoder = LabelEncoder()
     encoder.fit(Y)
     # haarcascade = cv.CascadeClassifier("haarcascade_frontalface_default.xml")
-    model = pickle.load(open(get_cusom_Path_from_here("svm_model_160x160_sample_05062024.pkl"), 'rb'))
+    model = pickle.load(open(get_cusom_Path_from_here("svm_model_160x160_sample_26062024.pkl"), 'rb'))
     # model = pickle.load(open(get_cusom_Path_from_here("svm_model_160x160_ver2.pkl"), 'rb'))
     return yolomodel,facenet,model,encoder
 
@@ -54,12 +54,12 @@ def prepare_model_noyolo():
 
     facenet = FaceNet()
     # faces_embeddings = np.load(get_cusom_Path_from_here("faces_embeddings_done_6classes.npz"))
-    faces_embeddings = np.load(get_cusom_Path_from_here("faces_embeddings_done_classes_sample_05062024.npz"))
+    faces_embeddings = np.load(get_cusom_Path_from_here("faces_embeddings_done_classes_sample_26062024.npz"))
     Y = faces_embeddings['arr_1']
     encoder = LabelEncoder()
     encoder.fit(Y)
     # haarcascade = cv.CascadeClassifier("haarcascade_frontalface_default.xml")
-    model = pickle.load(open(get_cusom_Path_from_here("svm_model_160x160_sample_05062024.pkl"), 'rb'))
+    model = pickle.load(open(get_cusom_Path_from_here("svm_model_160x160_sample_26062024.pkl"), 'rb'))
     # model = pickle.load(open(get_cusom_Path_from_here("svm_model_160x160_ver2.pkl"), 'rb'))
     return facenet,model,encoder
 
